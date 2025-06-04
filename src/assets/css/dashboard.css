@@ -1,0 +1,23 @@
+body a{
+    text-decoration: none;
+    color: black;
+}
+.icon-plus{
+    width: 40px;
+}
+.container-view{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.background-dash{
+    background-image: url(../img/bg-dash.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    filter: blur(8px);
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}

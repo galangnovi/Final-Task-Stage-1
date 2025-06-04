@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <link rel="icon" href="assets/img/gna.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/form.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+<div class="background-dash"></div>
+<main>
+   <div class="container-bd">
+        {{#each user_app}}
+        <div class="main-hero">
+            <div class="" style=" display: flex; align-items: center; gap: 90px;">
+                <img class="main-img" src="../assets/{{this.image}}" alt="">
+            </div>
+            <div class="cont-1">
+                <span style="display: flex; flex-direction:column;">
+                <h1>{{this.name}}</h1>
+                <h4>{{this.email}}</h4>
+                </span>
+                <br>
+                <p class="sub-h1">{{this.profession}}</p>
+                <p>{{this.description}}</p>
+                <div style="text-decoration: none; color:inherit;">
+                    <i class="bi bi-geo-alt"></i> LINK LOCATION : {{this.location}}
+                </div>
+                <br>
+                <div>
+                    <p>
+                    <img src="assets/img/dot.png" alt="" style="width: 20px; height: 20px; margin-right: 10px;"> LINK : {{this.link_location}}
+                    </p>
+                </div>
+                <div style="display: flex; flex-direction:column;">
+                        <p>LINK WA : {{this.link_wa}}</p>
+                        <p>LINK CV : {{this.link_cv}}</p>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    <div style="justify-content: end; display: flex;gap:30px;">
+        <a class="btn btn-primary" href="/dashboard" role="button">Back</a>
+    </div>
+    {{#each user_app}}
+    <form method="post" enctype="multipart/form-data" style="margin-top:200px">
+    <div class="container-title">
+        <h1>Edit Profil Data</h1>
+    </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Name</label>
+             <input type="text" class="form-control" id="exampleFormControlInput1" value="{{this.name}}" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email</label>
+             <input type="email" class="form-control" id="exampleFormControlInput1" value="{{this.email}}" name="email">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Password</label>
+             <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="leave blank if no changes" name="password">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="description">{{this.description}}</textarea>
+        </div> 
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Location</label>
+             <input type="text" class="form-control" id="exampleFormControlInput1" value="{{this.location}}" name="location">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">LOCATION LINK</label>
+             <input type="text" class="form-control" id="exampleFormControlInput1" value="{{this.link_location}}" name="link_location">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">LINK WA</label>
+             <input type="text" class="form-control" id="exampleFormControlInput1" value="{{this.link_wa}}" name="link_wa">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">LINK CV</label>
+             <input type="text" class="form-control" id="exampleFormControlInput1" value="{{this.link.cv}}" name="link_cv">
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Image Project</label>
+            <input class="form-control" type="file" id="formFile" name="image">
+        </div>
+        <input type="hidden" name="id" value="{{this.id}}">
+        <div style="justify-content: end; display: flex; margin-top:20px">
+            <button type="submit" class="btn btn-secondary" style="width: 200px; justify-items: end;">Submit</button>
+        </div>
+    </form>
+    {{/each}}
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+<script src="/assets/JS/form.js"></script>
+</body>
+</html>

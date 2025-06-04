@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galang Novi Anggara</title>
+    <link rel="icon" href="assets/img/gna.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body >
+<nav class="navbar navbar-expand-lg" style="position: fixed; top: 0; right: 0;left: 0; z-index: 1000; height: 70px; background-color: inherit;">
+    <div class="container-fluid">
+        <ul class="navbar-nav" style="display: flex; justify-content:space-between; margin-left:150px">
+        <li class="nav-item dropdown" > 
+          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+            <img src="assets/img/gna.png" alt="Logo Dumbways" style="height: 90px; padding-left: 20px;">
+          </a>
+          <ul class="dropdown-menu" style="transform: translateY(-20px);">
+            {{#if user_active}}
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+            {{else}}
+            <li><a class="dropdown-item" href="/login">Login</a></li>
+            <li><a class="dropdown-item" href="#about">about</a></li>
+            {{/if}}
+          </ul>
+        </li>
+        </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="justify-content: end; margin-right: 150px; gap: 15px;">
+            <div class="navbar-nav" style="gap: 15px;">
+                <a class="nav-link active-hover" aria-current="page" href="#tech-stack">Tech Stack</a>
+                <a class="nav-link active-hover" aria-current="page" href="#work-experience">Work Experience</a>
+                <a class="nav-link active-hover" href="#my-project">My Project</a>
+            </div>
+            {{#each user_app}}
+            <div style="display: flex; gap: 15px;">
+                <a href="{{this.link_wa}}" style="text-decoration: none;">
+                    <button type="button" class="btn btn-success" >
+                        <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
+                    </button>
+                </a>
+                <a href="{{this.link_cv}}">
+                    <button type="button" class="btn btn-dark">
+                        <i class="bi bi-file-earmark-arrow-down"></i> Download CV
+                    </button>
+                </a>
+                <button type="button" class="btn" id="toggleBtn"></button>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</nav>    
+<!-- main section -->
+<main>
+    <div class="container-bd">
+        {{#each user_app}}
+        <div class="main-hero">
+            <div class="" style=" display: flex; align-items: center; gap: 90px;">
+                <img class="main-img" src="../assets/{{this.image}}" alt="">
+            </div>
+            <div class="cont-1">
+                <span style="display: flex; gap: 20px;">
+                <h1>Hi I'm {{this.name}}</h1>
+                <img class="hello-img" src="/assets/img/hello.png" alt="">
+                </span>
+                <p class="sub-h1">{{this.profession}}</p>
+                <br>
+                <p>{{this.description}}</p>
+                <a href="{{this.link_location}}" style="text-decoration: none; color:inherit;">
+                    <i class="bi bi-geo-alt"></i> {{this.location}}
+                </a>
+                <div>
+                    <p>
+                    <img src="assets/img/dot.png" alt="" style="width: 20px; height: 20px; margin-right: 10px;">available for new project
+                    </p>
+                </div>
+                <br>
+                <div style="display: flex; gap: 15px;">
+                     <a href="{{this.link_wa}}">
+                    <button type="button" class="btn btn-success" >
+                        <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
+                    </button>
+                </a>
+                <a href="{{this.link_cv}}">
+                    <button type="button" class="btn btn-dark">
+                        <i class="bi bi-file-earmark-arrow-down"></i> Download CV
+                    </button>
+                </a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        <div style="overflow: hidden;">
+        <div id="tech-stack" style="padding-top: 130px;">
+            <h1>Tech Stack - Tools I Use Everyday</h1>
+            <div class="container-scroll">
+                <div class="container-techno" style="display: flex; justify-content: space-around; margin: 60px 0 60px 0;">
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/javascript.png" alt="" class="Techno">
+                        </div>
+                        <h5>JavaScript</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/dotnet.png" alt="" class="Techno">
+                        </div>
+                        <h5>Dotnet</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/mongodb.png" alt="" class="Techno">
+                        </div>
+                        <h5>Mongodb</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/next.png" alt="" class="Techno">
+                        </div>
+                        <h5>Next JS</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/node.png" alt="" class="Techno">
+                        </div>
+                        <h5>Node JS</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/postgre.png" alt="" class="Techno">
+                        </div>
+                        <h5>Postgre</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/react.png" alt="" class="Techno">
+                        </div>
+                        <h5>React</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/tailwind.png" alt="" class="Techno">
+                        </div>
+                        <h5>tailwind</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/typescript.png" alt="" class="Techno">
+                        </div>
+                        <h5>TypeScript</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/unity.png" alt="" class="Techno">
+                        </div>
+                        <h5>Unity</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/javascript.png" alt="" class="Techno">
+                        </div>
+                        <h5>JavaScript</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/dotnet.png" alt="" class="Techno">
+                        </div>
+                        <h5>Dotnet</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/mongodb.png" alt="" class="Techno">
+                        </div>
+                        <h5>Mongodb</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/next.png" alt="" class="Techno">
+                        </div>
+                        <h5>Next JS</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/node.png" alt="" class="Techno">
+                        </div>
+                        <h5>Node JS</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/postgre.png" alt="" class="Techno">
+                        </div>
+                        <h5>Postgre</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/react.png" alt="" class="Techno">
+                        </div>
+                        <h5>React</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/tailwind.png" alt="" class="Techno">
+                        </div>
+                        <h5>tailwind</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/typescript.png" alt="" class="Techno">
+                        </div>
+                        <h5>TypeScript</h5>
+                    </div>
+                    <div class="container-dp-techno" id="icon">
+                        <div class="container-img">
+                            <img src="assets/img/unity.png" alt="" class="Techno">
+                        </div>
+                        <h5>Unity</h5>
+                    </div>
+                </div>
+            </div>         
+        </div>
+        </div>
+        <div id="work-experience" class="container-work">
+            <h1 style="margin-top: 100px; margin-bottom: 50px;" >Work Experience</h1>
+            {{#each work_experience}}
+            <div style="display: flex; border-radius: 7px; box-shadow: 0.5px 0.5px 5px black; padding: 10px 20px 10px 20px; justify-content: space-between; margin-bottom: 20px;">
+                <div class="container-imgtools" style="width: 100px;">
+                <img src="../assets/uploads/{{this.image}}" alt="" style="width: 80px;">
+                </div>
+                <div style="width: 70%;">
+                <h4 style="margin-bottom: 0;">{{this.position}}</h4>
+                <p style="color: green;font-size: small;">{{this.company}}</p>
+                <ul style="list-style: disc;">
+                    {{#each description}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                <div style="display: flex; gap: 10px;">
+                    {{#each tech}}
+                    <p class="icn-experience">{{this}}</p>
+                    {{/each}}
+                </div>
+                </div>
+                <div> 
+                <p>{{period}}</p> 
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div id="my-project" style="flex-wrap: wrap;">
+            <h1 style="margin-bottom: 50px; margin-top: 200px;">My Project</h1>
+            <div style="display: flex; flex-wrap: wrap;">
+            <div style="display: flex;justify-content: space-between; flex-wrap: wrap; gap:20px;">
+                {{#if portofolio.length}}
+                {{#each portofolio}}
+                <div class="card">
+                    <div class="card-frame-img">
+                        <img src="../assets/uploads/{{this.image}}" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.name}}</h5>
+                        <p class="card-text">{{this.description}}</p>
+                        <div style="display: flex; gap: 10px;">
+                            {{#each techno}}
+                                <div style="display: flex; gap: 10px;">
+                                    <p class="icn-experience">{{this}}</p>
+                                </div>
+                            {{/each}}
+                        </div>
+                        <div style="display:flex; gap:20px;">
+                        {{#if git_url.length}}
+                            <a href="{{git_url}}" style="text-decoration: none;">
+                                <i class="bi bi-github"></i> view on GitHub
+                            </a>
+                        {{else}}
+                            <p><i class="bi bi-github"></i> Private Repository</p>
+                        {{/if}}
+                        {{#if demo_url.length}}
+                            <a href="{{demo_url}}" style="text-decoration: none; margin-left: 20px;">
+                                <i class="bi bi-box-arrow-up-right"></i> Live Demo
+                            </a>
+                        {{else}}
+                            <p><i class="bi bi-box-arrow-up-right"></i> Live Demo Unavailable</p>
+                        {{/if}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <P>Tidak Ada Proyek</P>
+                {{/if}}
+            </div>
+            </div>
+        </div>
+        <div style="margin-top: 200px; margin-bottom: 100px;" id="about">
+            <div style="display: grid; justify-content: center;">
+                <h2 style="display: flex; justify-content: center;">Let's build something together</h2>
+                <p>Feel free to reach out if you're looking for a developer, have a question, or just want to connect.</p>
+                <div style="display: flex; justify-content: center;">
+                    <div>
+                        <p><i class="bi bi-envelope-open"></i> galangnovi21@gmail.com</p>
+                    </div>
+                    <p style="margin-left: 20px; margin-right: 20px;">|</p>
+                    <div>
+                        <p style="color: green;">
+                        <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px; border-radius: 20px; background-color: green;"> 085334462008  
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <hr>
+    <div class="footitem" style="display: grid; justify-content: center; margin: 25px 0 25px 0">
+        <span style="margin-bottom: 15px;">
+            <h10>© 2025 Designed and coded with ❤️ by Galang Novi Anggara</h10>
+        </span>
+        <div style="display: flex; justify-content: center; gap: 10px;">
+            <a href="" style="color: inherit;">
+                <i class="bi bi-github"></i>
+            </a>
+            <a href="" style="color: inherit;">
+                <i class="bi bi-linkedin"></i>
+            </a>
+        </div>
+    </div>
+</footer>   
+<!-- <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>  -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+<script src="/assets/JS/script.js"></script>
+</body>
+</html>

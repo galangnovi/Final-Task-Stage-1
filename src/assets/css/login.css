@@ -1,0 +1,86 @@
+main{
+    /* background-image: url('../img/poly_digital_06.jpg'); 
+    background-size: cover;
+    background-position: 0 -90px; */
+    /* position: relative; */
+    height : 500px;
+    width: 900px;
+    margin: 80px 100px 80px 100px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255, 0.99);
+    
+}
+
+#exampleInputEmail1{
+    padding-left: 40px; /* kasih ruang buat gambar di kiri */
+    background-image: url('../img/email.jpg'); /* ganti URL dengan foto/icon */
+    background-repeat: no-repeat;
+    background-position: 10px center; /* posisi gambar */
+    background-size: 24px 24px; /* ukuran gambar */
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    background-color: transparent;
+    height: 50px;
+    font-size: 16px;
+}
+
+#exampleInputPassword1{
+    padding-left: 40px; /* kasih ruang buat gambar di kiri */
+    background-image: url('../img/pass.jpg'); /* ganti URL dengan foto/icon */
+    background-repeat: no-repeat;
+    background-position: 10px center; /* posisi gambar */
+    background-size: 24px 24px; /* ukuran gambar */
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    border-radius: 0;
+    height: 50px;
+    font-size: 16px;
+}
+.form-control::placeholder{
+    color: black;
+    font-weight: bold;
+}
+.container-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+}
+
+
+.login-box{
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 20px;
+    display: flex;
+}
+.mb-3{
+    margin-bottom: 20px;
+}
+form{
+    width: 40%;
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 0 10px 0 0;
+}
+
+.background{
+    background-image: url('../img/backgr.jpg');
+    background-size: cover;
+    background-position: 0 -200px;
+    filter: blur(8px); /* <-- gambar diblur */
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+html,body{
+    height: 100%;
+    position: relative;
+}

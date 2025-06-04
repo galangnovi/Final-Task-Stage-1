@@ -1,247 +1,417 @@
-// const btn = document.getElementById('toggleBtn');
-//     const body = document.body;
-
-//     let isDark = false;
-
-//     btn.addEventListener('click', () => {
-//       isDark = !isDark;
-
-//       if (isDark) {
-//         body.setAttribute('data-bs-theme',"dark");
-//         btn.textContent = '🌙';
-//       } else {
-//         body.setAttribute('data-bs-theme',"light");
-//         btn.textContent = '🌞';
-//       }
-//     });
+import express from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import hbs from 'hbs'
+import { Pool } from 'pg'
+import bcrypt from'bcrypt'
+import flash from 'express-flash'
+import session from 'express-session'
+import multer from 'multer'
 
 
-const body = document.body;
-const btn = document.getElementById('toggleBtn');
+const db = new Pool({
+  user: 'postgres',
+  password: 'admin',
+  host: 'localhost',
+  port: 5432,
+  database: 'final-task-1',
+  max: 20
+})
 
-// Ambil mode tersimpan (default: dark)
-let isDark = localStorage.getItem('mode') === 'dark';
 
-// Atur tema awal saat halaman dimuat
-if (isDark) {
-    body.setAttribute('data-bs-theme', 'dark');
-    btn.innerHTML = '<i class="bi bi-moon-fill"></i>';
-} else {
-    body.setAttribute('data-bs-theme', 'light');
-    btn.innerHTML = '<i class="bi bi-brightness-high"></i>';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express()
+const port = 3000
+
+// app.use(express.json())
+app.use(express.urlencoded({extended:false}))
+
+
+app.use(session({
+  secret: 'secretKey',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 5 //5 jam
+  }
+}))
+
+app.use(flash())
+app.use((req, res, next) => {
+  res.locals.error = req.flash('error');
+  next();
+});
+
+
+//multer  disk storage
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'src/assets/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + Date.now() + path.extname(file.originalname))
+  },
+});
+
+const upload = multer({ storage: storage })
+
+
+//Daftarkan folder statis
+app.use('/assets', express.static('src/assets'))
+
+
+// Setup folder publik dan upload
+// app.use('/uploads', express.static('uploads'));
+// app.use(express.static('src'));
+
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'src/views'));
+
+// Daftarkan folder partials
+hbs.registerPartials(path.join(__dirname, 'src/views/partials'));
+
+app.get('/', (req, res) => {
+  res.redirect('/home')
+})
+
+app.get('/tech-upload',(req,res) =>{
+  res.render('tech-upload')
+})
+
+//tampilkan detail untuk edit (techno)
+app.get('/tech/:id/detail', async (req,res) =>{
+  let {id} = req.params
+  const result = await db.query(`
+    SELECT * FROM public.tech_icon WHERE id=$1`,
+  [id]);
+  const tech = result.rows[0]
+  res.render('tech-edit', {tech})
+})
+
+//update data (techno)
+app.post('/tech/:id/detail', upload.single('image'), async (req,res) =>{
+  const {id} = req.params
+  const name = req.body.name
+  const image = req.file ? `${req.file.filename}` : null;
+  const insertResult = await db.query(
+    `UPDATE public.tech_icon
+     SET  icon_image = COALESCE ($1, icon_image), 
+          name = $2
+     WHERE id =$3;`,
+    [image, name, id]
+  );
+  res.redirect('/dashboard')
+})
+
+//delete (techno)
+app.get('/icon-tech/delete/:id', async (req, res) => {
+  const { id } = req.params
+  const result = await db.query('DELETE FROM public.tech_icon WHERE id = $1', [id]); 
+  res.redirect('/dashboard');
+});
+
+app.get('/login', (req,res) =>{
+  res.render('login')
+})
+
+app.get('/profil', async (req,res) =>{
+  const result4 = await db.query('SELECT * FROM public.user_app');
+  const user_app = result4.rows;
+  res.render('profil', {user_app});
+})
+
+app.get('/home', async (req, res) =>{
+  const result1 = await db.query('SELECT * FROM public.tech_icon');
+  const tech_icon = result1.rows;
+  const result2 = await db.query('SELECT * FROM public.work_experience');
+  const work = result2.rows;
+    const work_experience = work.map(exp => {
+      const start = formatMonthYearOrPresent(exp.start_date);
+      const end = exp.end_date ? formatMonthYearOrPresent(exp.end_date) : 'Present';
+
+      return {
+        ...exp,
+        period: `${start} - ${end}`
+    };
+  });
+  const result3 = await db.query('SELECT * FROM public.portofolio');
+  const portofolio = result3.rows;
+  const result4 = await db.query('SELECT * FROM public.user_app');
+  const user_app = result4.rows;
+  const user_active = req.session.user;
+  res.render('index', { tech_icon , work_experience, portofolio, user_app, user_active});
+});
+
+app.get('/work', (req,res) =>{
+  res.render('work-form')
+})
+
+app.get('/portofolio', (req,res) =>{
+  res.render('portofolio-form')
+})
+
+function formatMonthYearOrPresent(dateStr) {
+  if (!dateStr) return 'Present';  // kalau null atau undefined dianggap masih aktif
+
+  const date = new Date(dateStr);
+  const now = new Date();
+
+  // Jika tanggal lebih besar dari sekarang, anggap masih aktif
+  if (date > now) return 'Present';
+
+  const options = { year: 'numeric', month: 'short' };
+  return date.toLocaleDateString('en-US', options);
 }
 
-btn.addEventListener('click', () => {
-isDark = !isDark;
+//jalankan route dashboard tambah enskripsi
+app.get('/dashboard', checkLogin, async (req, res) => {
+  const result1 = await db.query('SELECT * FROM public.tech_icon');
+  const tech_icon = result1.rows;
+  const result2 = await db.query('SELECT * FROM public.work_experience');
+  const work = result2.rows;
+    const work_experience = work.map(exp => {
+      const start = formatMonthYearOrPresent(exp.start_date);
+      const end = exp.end_date ? formatMonthYearOrPresent(exp.end_date) : 'Present';
 
-if (isDark) {
-    body.setAttribute('data-bs-theme', 'dark');
-    btn.innerHTML = '<i class="bi bi-moon-fill"></i>';
-    localStorage.setItem('mode', 'dark');
-    } else {
-    body.setAttribute('data-bs-theme', 'light');
-    btn.innerHTML = '<i class="bi bi-brightness-high"></i>';
-    localStorage.setItem('mode', 'light');
+      return {
+        ...exp,
+        period: `${start} - ${end}`
+    };
+  });
+  const result3 = await db.query('SELECT * FROM public.portofolio');
+  const portofolio = result3.rows;
+  res.render('dashboard', { tech_icon , work_experience, portofolio});
+});
+
+ //midleware apakah user sudah login
+function checkLogin(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    req.flash('error', 'Silahkan login dulu');
+    res.redirect('/login');
+  }
+}
+
+app.post('/tech-upload', upload.single('image_tech'), handleUploadTech )
+
+app.post('/login', matchingData)
+
+async function matchingData (req,res) {
+let{ email, password} = req.body
+const isLogin= await db.query( `SELECT * FROM user_app WHERE email= '${email}'`)
+
+if (isLogin.rows.length === 0) {
+    // Email tidak ditemukan
+    req.flash('error', 'Email atau password salah');
+    return res.redirect('/login');
+  }
+
+const isMatch= await bcrypt.compare(password, isLogin.rows[0].password)
+
+if(isMatch){
+  // Simpan user ke session dulu baru bisa gunakan enkripsi midleware
+    req.session.user={
+      id: isLogin.rows[0].id,
+      name: isLogin.rows[0].name,
+      image: isLogin.rows[0].image
     }
-}); 
+ return res.redirect('/dashboard')
+} else { req.flash('error', 'email atau password salah')
+ return res.redirect('/login')
+}}
 
-const icon = document.getElementById('icon');
-    let isDragging = false;
-    let offsetX = 0;
-
-    icon.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      icon.classList.add('dragging');
-      offsetX = e.clientX - icon.offsetLeft;
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (isDragging) {
-        icon.style.left = `${e.clientX - offsetX}px`;
-      }
-    });
-
-    window.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        icon.classList.remove('dragging');
-        icon.style.animation = 'slide 10s linear infinite';
-      }
-    });
-
-    // Hentikan animasi saat klik pertama kali
-    icon.addEventListener('mousedown', () => {
-      icon.style.animation = 'none';
-    });
-
-
-let data1 = []
-let data2 = []
-function dataPushExperience() {
-    let technoIcon = techno.map(techno=>{
-        if (techno) 
-        return(`<p class="icn-experience">${techno}</p>`)
-    }).join("\n")
-    let experiences = experience.map (experience =>{
-        if (experience)
-        return (`<li>${experience}</li>`)
-    }).join("\n")
-    let dataWork= {
-        imageWork,
-        nameWork,
-        workLocation,
-        experiences,
-        technoIcon,
-        duration,
+//link log out
+app.get('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.log(err);
+      // Kalau error hapus session, tetap redirect ke login saja
+      return res.redirect('/home');
     }
-    data1.push(dataWork)
-    changeElement1()
+    res.redirect('/home'); // atau bisa redirect ke homepage jika mau
+  });
+});
+
+// console.log(req.body)
+
+bcrypt.hash('123456', 10).then(hash => {
+  console.log(hash);
+});
+
+
+//upload data (techno)
+async function handleUploadTech( req, res) {
+  const name = req.body.name
+  const image = req.file ? `${req.file.filename}` : null;
+   const insertResult = await db.query(
+    `INSERT INTO public.tech_icon (icon_image, name)
+     VALUES ($1, $2)`,
+    [image, name]
+  );
+  res.redirect('/dashboard')
 }
 
-function changeElement1(){
-    document.getElementById("change1").innerHTML = data1.map(data1 =>
-        `<div style="display: flex; border-radius: 7px; box-shadow: 0.5px 0.5px 5px black; padding: 10px 20px 10px 20px; justify-content: space-between;">
-            <div class="container-imgtools" style="width: 100px;">
-                <img src="${data1.imageWork}" alt="" style="width: 80px;">
-            </div>
-            <div style="width: 70%;">
-                <h4 style="margin-bottom: 0;">${data1.nameWork}</h4>
-                <p style="color: green;font-size: small;">${workLocation}</p>
-                <ul style="list-style: disc;">
-                    ${data1.experiences}
-                </ul>
-                <div style="display: flex; gap: 10px;">
-                    ${data1.technoIcon}
-                </div>
-            </div>
-            <div> 
-                <p>${data1.duration}</p> 
-            </div>
-            </div>
-        </div>`
-    ).join("") 
-}
+//upload data (work experience)
+app.post('/work', upload.single('image'), async (req,res) =>{
+  let {position, company, start_date, end_date, description, tech} = req.body
+  const image = req.file ? `${req.file.filename}` : null;
+  const desc = Array.isArray(description)
+    ? description
+    : [description].filter(Boolean); // handle 1 atau lebih value
+  const techno = Array.isArray(tech)
+    ? tech
+    : [tech].filter(Boolean); // handle 1 atau lebih value
+  const result = await db.query(
+    `INSERT INTO public.work_experience (position, company, start_date, end_date, description, tech, image) 
+    VALUES ($1,$2,$3,$4,$5,$6,$7)
+    Returning id`,
+    [position, company, start_date, end_date, desc, techno, image]
+  );
+  const query = 'select * from public.work_experience';
+  const results = await db.query(query);
+  res.redirect('/dashboard')
+})
 
+// Tampilkan data (work experience)
+app.get('/work/:id/detail', async (req,res) =>{
+  const {id} = req.params
+  const result = await db.query(`
+    SELECT * FROM public.work_experience WHERE id=$1`,
+  [id]);
+  const project = result.rows[0]
 
-function dataPushProject() {
-    let technoIconProject = technoProject.map(technoProject=>{
-        if (technoProject) 
-        return(`<p class="icn-experience">${technoProject}</p>`)
-    }).join(" ")
+  // //pakai if agar format start dan end bisa jalan
+  // if (!project) { 
+  //   return res.send('Work experience not found');
+  // }
 
-    let viewGit = gitURL.map (gitURL =>{
-        if (gitURL.length > 0)
-        return (`<a href="${gitURL}" class="" style="text-decoration: none;">
-                    <i class="bi bi-github"></i>  view on GitHub
-                </a>`
-        ) 
-        else return ('<p><i class="bi bi-github"></i>  Private Repository</p>')
-    })
+  // Format tanggal agar cocok dengan <input type="date">
+  const work = {
+    ...project,
+    start_date: project.start_date ? new Date(project.start_date).toISOString().slice(0, 10) : '',
+    end_date: project.end_date ? new Date(project.end_date).toISOString().slice(0, 10) : ''
+  };
+  res.render('work-edit', {work})
+})
 
-    let liveDemo = demoURL.map (demoURL =>{
-        if (demoURL.length > 0)
-        return (`<a href="${demoURL}" class="" style="text-decoration: none;margin-left: 20px;">
-                        <i class="bi bi-box-arrow-up-right"></i>  Live Demo</a>`
-        ) 
-        else return ('<p><i class="bi bi-box-arrow-up-right"></i>  Live Demo Unavailable</p>')
-    })
+//update data (work experience)
+app.post('/work/:id/detail', upload.single('image'), async (req,res) =>{
+  const {id} = req.params
+  let {position, company, start_date, end_date, description, tech} = req.body
+  const image = req.file ? `${req.file.filename}` : null;
+  const desc = Array.isArray(description)
+    ? description
+    : [description].filter(Boolean); // handle 1 atau lebih value
+  const techno = Array.isArray(tech)
+    ? tech
+    : [tech].filter(Boolean); // handle 1 atau lebih value
+  const insertResult = await db.query(
+    `UPDATE public.work_experience
+     SET  position = $1,
+          company = $2,
+          start_date = $3,
+          end_date = $4,
+          description = $5,
+          tech = $6,
+          image = COALESCE ($7, image) 
+     WHERE id =$8;`,
+    [position, company, start_date, end_date, desc, techno,image, id]
+  );
+  res.redirect('/dashboard')
+})
 
-    let dataProject= {
-        imageProject,
-        nameProject,
-        deskProject,
-        technoIconProject,
-        viewGit,
-        liveDemo,
-    }
-    data2.push(dataProject)
-    changeElement2()
-}
+//delete (work experience)
+app.get('/work/delete/:id', async (req, res) => {
+  const { id } = req.params
+  const result = await db.query('DELETE FROM public.work_experience WHERE id = $1', [id]); 
+  res.redirect('/dashboard');
+});
 
-function changeElement2(){
-    document.getElementById("change2").innerHTML = data2.map( data2 =>
-        `<div class="card">
-            <div class="card-frame-img">
-                <img src="${data2.imageProject}" class="card-img-top" alt="...">
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">${data2.nameProject}</h5>
-                <p class="card-text">${data2.deskProject}</p>
-                <div style="display: flex; gap: 10px;">
-                    ${data2.technoIconProject}
-                </div>
-                <div style="display:flex; gap:20px;">
-                    ${data2.viewGit}
-                    ${data2.liveDemo}
-                </div>
-            </div>
-        </div>`
-    ).join("") 
-}
+//upload data (portofolio)
+app.post('/portofolio', upload.single('image'), async (req,res) =>{
+  let {name, description, tech, git, demo} = req.body
+  const image = req.file ? `${req.file.filename}` : null;
+  const techno = Array.isArray(tech)
+    ? tech
+    : [tech].filter(Boolean); // handle 1 atau lebih value
+  const result = await db.query(
+    `INSERT INTO public.portofolio (name, description, techno, git_url, demo_url, image) 
+    VALUES ($1,$2,$3,$4,$5,$6)`,
+    [name, description, techno, git, demo, image]
+  );
+  res.redirect('/dashboard')
+})
 
-// let image =
-// imegeWork = {"assets/img/dumbways.png"},
-// nameWork = {"dumbways"},
-// workLocatin = {"dumbways"},
-// experience = {"none"},
+//tampikan data (portofolio)
+app.get('/portofolio/:id/detail', async (req,res) =>{
+  const {id} = req.params
+  const result = await db.query(`
+    SELECT * FROM public.portofolio WHERE id=$1`,
+  [id]);
+  const portofolio = result.rows
+  res.render('portofolio-edit', {portofolio})
+})
 
+// update data (portofolio)
+app.post('/portofolio/:id/detail', upload.single('image'), async (req,res) =>{
+  const {id} = req.params
+  let {name, description, tech, git, demo} = req.body
+  const image = req.file ? `${req.file.filename}` : null;
+  const techno = Array.isArray(tech)
+    ? tech
+    : [tech].filter(Boolean); // handle 1 atau lebih value
+  const insertResult = await db.query(
+    `UPDATE public.portofolio
+     SET  name = $1,
+          description = $2,
+          techno = $3,
+          git_url = $4,
+          demo_url = $5,
+          image = COALESCE ($6, image) 
+     WHERE id =$7;`,
+    [name, description, techno, git, demo, image, id]
+  );
+  res.redirect('/dashboard')
+})
 
-// data pertama
-imageWork ="assets/img/dumbways.png"
-nameWork = "dumbways"
-workLocation = "dumbways"
-experience = ["none"]
-techno = ["java","embuh"]
-duration = "november only"
-dataPushExperience()
+//delete (portofolio)
+app.get('/portofolio/delete/:id', async (req, res) => {
+  const { id } = req.params
+  const result = await db.query('DELETE FROM public.portofolio WHERE id = $1', [id]); 
+  res.redirect('/dashboard');
+});
 
-imageProject = "assets/unnamed.jpg"
-nameProject = "nama Saya Sendiri"
-deskProject = "entah gak tau tapi saya suka makan kadang begadang"
-technoProject = ["shutdown","colok saklar","ngeprint file"]
-gitURL = ["sdas"]
-demoURL = ["dsadas"]
-dataPushProject()
+//update data (profil)
+app.post('/profil', upload.single('image'), async (req,res) =>{
+  let {id, email, password, name, profession, description, location, link_location, link_wa, link_cv} = req.body
+  const image = req.file ? `${req.file.filename}` : null;
+  let hashPassword = null;
+    if (password && password.trim() !== '') {
+    hashPassword = await bcrypt.hash(password, 10);
+  }
+  const insertResult = await db.query(
+    `UPDATE public.user_app
+     SET  email = $1,
+          password = COALESCE ($2, password),
+          name = $3,
+          profession = $4,
+          description = $5,
+          link_location = $6,
+          link_wa = $7,
+          link_cv = $8,
+          location = $9,
+          image = COALESCE ($10, image) 
+     WHERE id =$11;`,
+    [email, hashPassword, name, profession, description, link_location, link_wa, link_cv, location, image, id]
+  );
+  res.redirect('/dashboard')
+})
 
-
-imageProject = "assets/img/tailwind.png"
-nameProject = "nama ngawur"
-deskProject = "entah gak tau"
-technoProject = ["ya","boleh"]
-gitURL = ["#"]
-demoURL = ["#"]
-dataPushProject()
-
-imageProject = "assets/img/tailwind.png"
-nameProject = "nama ngawur"
-deskProject = "entah gak tau"
-technoProject = ["okelah kalau begitu","boleh"]
-gitURL = [""]
-demoURL = [""]
-dataPushProject()
-
-imageProject = "assets/unnamed.jpg"
-nameProject = "nama Saya Sendiri"
-deskProject = "entah gak tau tapi saya suka makan kadang begadang"
-technoProject = ["shutdown","colok saklar","ngeprint file"]
-gitURL = [""]
-demoURL = ["sfsdf"]
-dataPushProject()
-console.log(gitURL)
-console.log(demoURL)
-
-function plusElement1() {
-    document.getElementById('plus1').innerHTML +=`
-    <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Deskripsi Pekerjaan</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
-        </div>`
-}
-
-function plusElement2() {
-    document.getElementById('plus2').innerHTML +=`
-    <div class="mb-3" style="width: 400px;">
-            <label for="exampleFormControlInput1" class="form-label">Teknologi Yang Digunakan</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-        </div>`
-}
+app.listen(port, () => {
+  console.log(`Example app listening on http://localhost:${port}/`)
+})

@@ -1,0 +1,58 @@
+.background{
+    background-image: url(../img/bg-form.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    filter: blur(40px);
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+main{
+    padding: 50px 20% 10px 20% !important;
+}
+ .container-title{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+ }
+form{
+    background-color: rgb(255, 255, 255);
+    padding: 20px 100px 20px 100px;
+    box-shadow: 1px 1px 25px rgb(17, 17, 17);
+    border-radius: 20px;
+}
+
+html,body{
+    height: 100%;
+    position: relative;
+}
+
+label{
+    font-weight: bold;
+}
+.tech-direction{
+    display: flex; 
+    flex-direction: row; 
+    gap: 30px; 
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+.position-form{
+    display: flex; 
+    flex-direction: row; 
+    gap: 30px;
+    justify-content: space-between;
+}
+.mb-form{
+    width: 48%;
+    margin-bottom: 30px;
+}
+.mb-3{
+    margin-bottom: 30px;
+}
+
+.img-preview{
+    width: 100px;
+}
