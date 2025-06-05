@@ -64,10 +64,6 @@ const upload = multer({ storage: storage })
 app.use('/assets', express.static('src/assets'))
 
 
-// Setup folder publik dan upload
-// app.use('/uploads', express.static('uploads'));
-// app.use(express.static('src'));
-
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'src/views'));
 
@@ -285,12 +281,6 @@ app.get('/work/:id/detail', async (req,res) =>{
   [id]);
   const project = result.rows[0]
 
-  // //pakai if agar format start dan end bisa jalan
-  // if (!project) { 
-  //   return res.send('Work experience not found');
-  // }
-
-  // Format tanggal agar cocok dengan <input type="date">
   const work = {
     ...project,
     start_date: project.start_date ? new Date(project.start_date).toISOString().slice(0, 10) : '',

@@ -21,3 +21,8 @@ body a{
     height: 100vh;
     z-index: -1;
 }
+
+.table{
+    border-radius: 20px !important;
+    background-color: aqua !important;
+}

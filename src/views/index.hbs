@@ -11,51 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body >
-<nav class="navbar navbar-expand-lg" style="position: fixed; top: 0; right: 0;left: 0; z-index: 1000; height: 70px; background-color: inherit;">
-    <div class="container-fluid">
-        <ul class="navbar-nav" style="display: flex; justify-content:space-between; margin-left:150px">
-        <li class="nav-item dropdown" > 
-          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
-            <img src="assets/img/gna.png" alt="Logo Dumbways" style="height: 90px; padding-left: 20px;">
-          </a>
-          <ul class="dropdown-menu" style="transform: translateY(-20px);">
-            {{#if user_active}}
-            <li><a class="dropdown-item" href="/logout">Logout</a></li>
-            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-            {{else}}
-            <li><a class="dropdown-item" href="/login">Login</a></li>
-            <li><a class="dropdown-item" href="#about">about</a></li>
-            {{/if}}
-          </ul>
-        </li>
-        </ul>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="justify-content: end; margin-right: 150px; gap: 15px;">
-            <div class="navbar-nav" style="gap: 15px;">
-                <a class="nav-link active-hover" aria-current="page" href="#tech-stack">Tech Stack</a>
-                <a class="nav-link active-hover" aria-current="page" href="#work-experience">Work Experience</a>
-                <a class="nav-link active-hover" href="#my-project">My Project</a>
-            </div>
-            {{#each user_app}}
-            <div style="display: flex; gap: 15px;">
-                <a href="{{this.link_wa}}" style="text-decoration: none;">
-                    <button type="button" class="btn btn-success" >
-                        <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
-                    </button>
-                </a>
-                <a href="{{this.link_cv}}">
-                    <button type="button" class="btn btn-dark">
-                        <i class="bi bi-file-earmark-arrow-down"></i> Download CV
-                    </button>
-                </a>
-                <button type="button" class="btn" id="toggleBtn"></button>
-            </div>
-            {{/each}}
-        </div>
-    </div>
-</nav>    
+{{>navIndex}}
 <!-- main section -->
 <main>
     <div class="container-bd">
@@ -69,14 +25,14 @@
                 <h1>Hi I'm {{this.name}}</h1>
                 <img class="hello-img" src="/assets/img/hello.png" alt="">
                 </span>
-                <p class="sub-h1">{{this.profession}}</p>
+                <p class="sub-title">{{this.profession}}</p>
                 <br>
-                <p>{{this.description}}</p>
-                <a href="{{this.link_location}}" style="text-decoration: none; color:inherit;">
+                <p class="profil-content">{{this.description}}</p>
+                <a class="profil-content" href="{{this.link_location}}" style="text-decoration: none; color:inherit;">
                     <i class="bi bi-geo-alt"></i> {{this.location}}
                 </a>
                 <div>
-                    <p>
+                    <p class="profil-content">
                     <img src="assets/img/dot.png" alt="" style="width: 20px; height: 20px; margin-right: 10px;">available for new project
                     </p>
                 </div>
@@ -101,126 +57,22 @@
             <h1>Tech Stack - Tools I Use Everyday</h1>
             <div class="container-scroll">
                 <div class="container-techno" style="display: flex; justify-content: space-around; margin: 60px 0 60px 0;">
+                    {{#each tech_icon}}
                     <div class="container-dp-techno" id="icon">
                         <div class="container-img">
-                            <img src="assets/img/javascript.png" alt="" class="Techno">
+                            <img src="../assets/uploads/{{this.icon_image}}" alt="" class="Techno">
                         </div>
-                        <h5>JavaScript</h5>
+                        <h10 class="techno-font">{{this.name}}</h10>
                     </div>
+                    {{/each}}
+                    {{#each tech_icon}}
                     <div class="container-dp-techno" id="icon">
                         <div class="container-img">
-                            <img src="assets/img/dotnet.png" alt="" class="Techno">
+                            <img src="../assets/uploads/{{this.icon_image}}" alt="" class="Techno">
                         </div>
-                        <h5>Dotnet</h5>
+                        <h10 class="techno-font">{{this.name}}</h10>
                     </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/mongodb.png" alt="" class="Techno">
-                        </div>
-                        <h5>Mongodb</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/next.png" alt="" class="Techno">
-                        </div>
-                        <h5>Next JS</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/node.png" alt="" class="Techno">
-                        </div>
-                        <h5>Node JS</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/postgre.png" alt="" class="Techno">
-                        </div>
-                        <h5>Postgre</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/react.png" alt="" class="Techno">
-                        </div>
-                        <h5>React</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/tailwind.png" alt="" class="Techno">
-                        </div>
-                        <h5>tailwind</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/typescript.png" alt="" class="Techno">
-                        </div>
-                        <h5>TypeScript</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/unity.png" alt="" class="Techno">
-                        </div>
-                        <h5>Unity</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/javascript.png" alt="" class="Techno">
-                        </div>
-                        <h5>JavaScript</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/dotnet.png" alt="" class="Techno">
-                        </div>
-                        <h5>Dotnet</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/mongodb.png" alt="" class="Techno">
-                        </div>
-                        <h5>Mongodb</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/next.png" alt="" class="Techno">
-                        </div>
-                        <h5>Next JS</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/node.png" alt="" class="Techno">
-                        </div>
-                        <h5>Node JS</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/postgre.png" alt="" class="Techno">
-                        </div>
-                        <h5>Postgre</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/react.png" alt="" class="Techno">
-                        </div>
-                        <h5>React</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/tailwind.png" alt="" class="Techno">
-                        </div>
-                        <h5>tailwind</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/typescript.png" alt="" class="Techno">
-                        </div>
-                        <h5>TypeScript</h5>
-                    </div>
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
-                            <img src="assets/img/unity.png" alt="" class="Techno">
-                        </div>
-                        <h5>Unity</h5>
-                    </div>
+                    {{/each}}
                 </div>
             </div>         
         </div>
@@ -228,16 +80,16 @@
         <div id="work-experience" class="container-work">
             <h1 style="margin-top: 100px; margin-bottom: 50px;" >Work Experience</h1>
             {{#each work_experience}}
-            <div style="display: flex; border-radius: 7px; box-shadow: 0.5px 0.5px 5px black; padding: 10px 20px 10px 20px; justify-content: space-between; margin-bottom: 20px;">
+            <div class="work-style" style="display: flex; border-radius: 7px; box-shadow:0.2px 0.2px 1px black; padding: 10px 20px 10px 20px; justify-content: space-between; margin-bottom: 20px;">
                 <div class="container-imgtools" style="width: 100px;">
                 <img src="../assets/uploads/{{this.image}}" alt="" style="width: 80px;">
                 </div>
                 <div style="width: 70%;">
-                <h4 style="margin-bottom: 0;">{{this.position}}</h4>
-                <p style="color: green;font-size: small;">{{this.company}}</p>
-                <ul style="list-style: disc;">
+                <h4 class="title-font" style="margin-bottom: 0;">{{this.position}}</h4>
+                <p class="company-font" style="color: green;font-size: small;">{{this.company}}</p>
+                <ul style="list-style: disc; ">
                     {{#each description}}
-                    <li>{{this}}</li>
+                    <li class="font-exp" style="margin-bottom:10px;">{{this}}</li>
                     {{/each}}
                 </ul>
                 <div style="display: flex; gap: 10px;">
@@ -247,13 +99,13 @@
                 </div>
                 </div>
                 <div> 
-                <p>{{period}}</p> 
+                <p class="font-exp">{{period}}</p> 
                 </div>
             </div>
             {{/each}}
         </div>
-        <div id="my-project" style="flex-wrap: wrap;">
-            <h1 style="margin-bottom: 50px; margin-top: 200px;">My Project</h1>
+        <div id="my-project" style="flex-wrap: wrap; padding-top: 200px;">
+            <h1 style="margin-bottom: 50px; ">My Project</h1>
             <div style="display: flex; flex-wrap: wrap;">
             <div style="display: flex;justify-content: space-between; flex-wrap: wrap; gap:20px;">
                 {{#if portofolio.length}}
@@ -263,8 +115,10 @@
                         <img src="../assets/uploads/{{this.image}}" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{this.name}}</h5>
-                        <p class="card-text">{{this.description}}</p>
+                        <h5 class="card-title title-font">{{this.name}}</h5>
+                        <div style="height: 100px; flex-wrap:wrap; display:flex; overflow:hidden;">
+                            <p class="card-text font-exp">{{this.description}}</p>
+                        </div>
                         <div style="display: flex; gap: 10px;">
                             {{#each techno}}
                                 <div style="display: flex; gap: 10px;">
@@ -272,20 +126,20 @@
                                 </div>
                             {{/each}}
                         </div>
-                        <div style="display:flex; gap:20px;">
+                        <div style="display:flex; gap:20px; height:40px">
                         {{#if git_url.length}}
-                            <a href="{{git_url}}" style="text-decoration: none;">
-                                <i class="bi bi-github"></i> view on GitHub
+                            <a class="font-exp" href="{{git_url}}" style="text-decoration: none;">
+                                <i class="bi bi-github" style="width: 5px;"></i> view on GitHub
                             </a>
                         {{else}}
-                            <p><i class="bi bi-github"></i> Private Repository</p>
+                            <p class="font-exp"><i class="bi bi-github " style="width: 5px;"></i> Private Repository</p>
                         {{/if}}
                         {{#if demo_url.length}}
-                            <a href="{{demo_url}}" style="text-decoration: none; margin-left: 20px;">
-                                <i class="bi bi-box-arrow-up-right"></i> Live Demo
+                            <a class="font-exp" href="{{demo_url}}" style="text-decoration: none; margin-left: 20px;">
+                                <i class="bi bi-box-arrow-up-right" style="width: 5px;"></i> Live Demo
                             </a>
                         {{else}}
-                            <p><i class="bi bi-box-arrow-up-right"></i> Live Demo Unavailable</p>
+                            <p class="font-exp"><i class="bi bi-box-arrow-up-right" style="width: 5px;"></i> Live Demo Unavailable</p>
                         {{/if}}
                         </div>
                     </div>
@@ -316,22 +170,7 @@
         </div>
     </div>
 </main>
-<footer>
-    <hr>
-    <div class="footitem" style="display: grid; justify-content: center; margin: 25px 0 25px 0">
-        <span style="margin-bottom: 15px;">
-            <h10>© 2025 Designed and coded with ❤️ by Galang Novi Anggara</h10>
-        </span>
-        <div style="display: flex; justify-content: center; gap: 10px;">
-            <a href="" style="color: inherit;">
-                <i class="bi bi-github"></i>
-            </a>
-            <a href="" style="color: inherit;">
-                <i class="bi bi-linkedin"></i>
-            </a>
-        </div>
-    </div>
-</footer>   
+{{>footer}}
 <!-- <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>  -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 <script src="/assets/JS/script.js"></script>
