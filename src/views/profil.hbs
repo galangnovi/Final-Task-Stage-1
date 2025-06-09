@@ -18,7 +18,7 @@
         {{#each user_app}}
         <div class="main-hero">
             <div class="" style=" display: flex; align-items: center; gap: 90px;">
-                <img class="main-img" src="../assets/{{this.image}}" alt="">
+                <img class="main-img" src="/assets/uploads/{{this.image}}" alt="">
             </div>
             <div class="cont-1">
                 <span style="display: flex; flex-direction:column;">
@@ -53,7 +53,7 @@
         <h1>Edit Profil Data</h1>
     </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Name</label>
+            <label for="exampleFormControlInput1" class="form-label">Nick Name</label>
              <input type="text" class="form-control" id="exampleFormControlInput1" value="{{this.name}}" name="name">
         </div>
         <div class="mb-3">
@@ -89,7 +89,7 @@
              <input type="text" class="form-control" id="exampleFormControlInput1" value="{{this.link.cv}}" name="link_cv">
         </div>
         <div class="mb-3">
-            <label for="formFile" class="form-label">Image Project</label>
+            <label for="formFile" class="form-label">User Image</label>
             <input class="form-control" type="file" id="formFile" name="image">
         </div>
         <input type="hidden" name="id" value="{{this.id}}">

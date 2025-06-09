@@ -17,7 +17,7 @@
         <div class="container-title">
             <h1>Edit Technologies</h1>
         </div>
-        <img class="img-preview" src="../assets/uploads/{{tech.icon_image}}" alt="">
+        <img class="img-preview" src="/assets/uploads/{{tech.icon_image}}" alt="">
         <div class="mb-3">
             <label for="formFile" class="form-label">Default file input example</label>
             <input class="form-control" type="file" id="formFile" name="image_tech">
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div>
-        <a class="btn btn-primary" href="/tech/delete/{{this.id}}" role="button">Delete</a>
+        <a class="btn btn-primary" href="/tech/delete/{{tech.id}}" role="button">Delete</a>
         <button type="submit" class="btn btn-primary">Edit</button>
     </div>
     </form>

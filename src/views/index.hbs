@@ -18,7 +18,7 @@
         {{#each user_app}}
         <div class="main-hero">
             <div class="" style=" display: flex; align-items: center; gap: 90px;">
-                <img class="main-img" src="../assets/{{this.image}}" alt="">
+                <img class="main-img" src="../assets/uploads/{{this.image}}" alt="">
             </div>
             <div class="cont-1">
                 <span style="display: flex; gap: 20px;">
@@ -89,7 +89,7 @@
                 <p class="company-font" style="color: green;font-size: small;">{{this.company}}</p>
                 <ul style="list-style: disc; ">
                     {{#each description}}
-                    <li class="font-exp" style="margin-bottom:10px;">{{this}}</li>
+                    <li class="font-exp" style="margin-bottom:5px;">{{this}}</li>
                     {{/each}}
                 </ul>
                 <div style="display: flex; gap: 10px;">
@@ -116,8 +116,8 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title title-font">{{this.name}}</h5>
-                        <div style="height: 100px; flex-wrap:wrap; display:flex; overflow:hidden;">
-                            <p class="card-text font-exp">{{this.description}}</p>
+                        <div style="height: 100px; flex-wrap:wrap; display:flex; overflow:hidden; margin-top:10px;">
+                            <p class="card-text font-card">{{this.description}}</p>
                         </div>
                         <div style="display: flex; gap: 10px;">
                             {{#each techno}}
@@ -128,18 +128,18 @@
                         </div>
                         <div style="display:flex; gap:20px; height:40px">
                         {{#if git_url.length}}
-                            <a class="font-exp" href="{{git_url}}" style="text-decoration: none;">
+                            <a class="font-card" href="{{git_url}}" style="text-decoration: none;">
                                 <i class="bi bi-github" style="width: 5px;"></i> view on GitHub
                             </a>
                         {{else}}
-                            <p class="font-exp"><i class="bi bi-github " style="width: 5px;"></i> Private Repository</p>
+                            <p class="font-card"><i class="bi bi-github " style="width: 5px;"></i> Private Repository</p>
                         {{/if}}
                         {{#if demo_url.length}}
-                            <a class="font-exp" href="{{demo_url}}" style="text-decoration: none; margin-left: 20px;">
+                            <a class="font-card" href="{{demo_url}}" style="text-decoration: none; margin-left: 20px;">
                                 <i class="bi bi-box-arrow-up-right" style="width: 5px;"></i> Live Demo
                             </a>
                         {{else}}
-                            <p class="font-exp"><i class="bi bi-box-arrow-up-right" style="width: 5px;"></i> Live Demo Unavailable</p>
+                            <p class="font-card"><i class="bi bi-box-arrow-up-right" style="width: 5px;"></i> Live Demo Unavailable</p>
                         {{/if}}
                         </div>
                     </div>

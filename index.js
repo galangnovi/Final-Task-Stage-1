@@ -74,18 +74,20 @@ app.get('/', (req, res) => {
   res.redirect('/home')
 })
 
-app.get('/tech-upload',(req,res) =>{
-  res.render('tech-upload')
+app.get('/tech-upload' , checkLogin,(req,res) =>{
+  const user_active = req.session.user;
+res.render('tech-upload', {user_active})
 })
 
 //tampilkan detail untuk edit (techno)
-app.get('/tech/:id/detail', async (req,res) =>{
+app.get('/tech/:id/detail' , checkLogin, async (req,res) =>{
   let {id} = req.params
   const result = await db.query(`
     SELECT * FROM public.tech_icon WHERE id=$1`,
   [id]);
   const tech = result.rows[0]
-  res.render('tech-edit', {tech})
+  const user_active = req.session.user;
+  res.render('tech-edit', {tech, user_active})
 })
 
 //update data (techno)
@@ -114,7 +116,7 @@ app.get('/login', (req,res) =>{
   res.render('login')
 })
 
-app.get('/profil', async (req,res) =>{
+app.get('/profil' , checkLogin, async (req,res) =>{
   const result4 = await db.query('SELECT * FROM public.user_app');
   const user_app = result4.rows;
   res.render('profil', {user_app});
@@ -142,12 +144,14 @@ app.get('/home', async (req, res) =>{
   res.render('index', { tech_icon , work_experience, portofolio, user_app, user_active});
 });
 
-app.get('/work', (req,res) =>{
-  res.render('work-form')
+app.get('/work' , checkLogin, (req,res) =>{
+  const user_active = req.session.user;
+  res.render('work-form', {user_active})
 })
 
-app.get('/portofolio', (req,res) =>{
-  res.render('portofolio-form')
+app.get('/portofolio' , checkLogin, (req,res) =>{
+  const user_active = req.session.user;
+  res.render('portofolio-form', {user_active})
 })
 
 function formatMonthYearOrPresent(dateStr) {
@@ -180,7 +184,8 @@ app.get('/dashboard', checkLogin, async (req, res) => {
   });
   const result3 = await db.query('SELECT * FROM public.portofolio');
   const portofolio = result3.rows;
-  res.render('dashboard', { tech_icon , work_experience, portofolio});
+  const user_active = req.session.user;
+  res.render('dashboard', { tech_icon , work_experience, portofolio, user_active});
 });
 
  //midleware apakah user sudah login
@@ -214,7 +219,8 @@ if(isMatch){
     req.session.user={
       id: isLogin.rows[0].id,
       name: isLogin.rows[0].name,
-      image: isLogin.rows[0].image
+      image: isLogin.rows[0].image,
+      email: isLogin.rows[0].email,
     }
  return res.redirect('/dashboard')
 } else { req.flash('error', 'email atau password salah')
@@ -274,7 +280,7 @@ app.post('/work', upload.single('image'), async (req,res) =>{
 })
 
 // Tampilkan data (work experience)
-app.get('/work/:id/detail', async (req,res) =>{
+app.get('/work/:id/detail' , checkLogin, async (req,res) =>{
   const {id} = req.params
   const result = await db.query(`
     SELECT * FROM public.work_experience WHERE id=$1`,
@@ -286,7 +292,8 @@ app.get('/work/:id/detail', async (req,res) =>{
     start_date: project.start_date ? new Date(project.start_date).toISOString().slice(0, 10) : '',
     end_date: project.end_date ? new Date(project.end_date).toISOString().slice(0, 10) : ''
   };
-  res.render('work-edit', {work})
+  const user_active = req.session.user;
+  res.render('work-edit', {work, user_active})
 })
 
 //update data (work experience)
@@ -338,13 +345,14 @@ app.post('/portofolio', upload.single('image'), async (req,res) =>{
 })
 
 //tampikan data (portofolio)
-app.get('/portofolio/:id/detail', async (req,res) =>{
+app.get('/portofolio/:id/detail' , checkLogin, async (req,res) =>{
   const {id} = req.params
   const result = await db.query(`
     SELECT * FROM public.portofolio WHERE id=$1`,
   [id]);
   const portofolio = result.rows
-  res.render('portofolio-edit', {portofolio})
+  const user_active = req.session.user;
+  res.render('portofolio-edit', {portofolio, user_active})
 })
 
 // update data (portofolio)

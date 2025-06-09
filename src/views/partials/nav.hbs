@@ -1,20 +1,25 @@
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarNavDropdown" style="justify-content: end; margin-right: 110px">
       
       <ul class="navbar-nav" style="display: flex; justify-content:space-between">
-        <li style="align-items: center; display:flex;"> Galang's Dashboard</li>
+        {{#if user_active}}
+        <li style="align-items: center; display:flex;"> {{user_active.name}}'s Dashboard</li>
         <li class="nav-item dropdown" > 
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="/assets/unnamed.jpg" alt="" style="width: 30px; border-radius:30px;">
+            <img src="/assets/uploads/{{user_active.image}}" alt="" style="width: 30px; border-radius:30px;">
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/Profil">Profile</a></li>
             <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-            <li><a class="dropdown-item" href="/home" target="_blank">View Live Web Page</a></li>
+            <li><a class="dropdown-item" href="/home">View Live Web Page</a></li>
             <li><a class="dropdown-item" href="/logout">Log out</a></li>
           </ul>
         </li>
+        {{else}}
+        <li style="align-items: center; display:flex;"> Need To be LOGIN FIRST</li>
+        {{/if}}
       </ul>
     </div>
   </div>

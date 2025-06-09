@@ -80,7 +80,7 @@ main{
 }
 
 .title-font{
-    font-size: 20px;
+    font-size: 20px !important;
 }
 
 .company-font{
@@ -88,7 +88,11 @@ main{
 }
 
 .font-exp{
-    font-size: 15px;
+    font-size: 15px !important;
+}
+
+.font-card{
+    font-size: 14px !important;
 }
     
 .Techno{
