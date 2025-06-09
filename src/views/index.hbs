@@ -38,7 +38,7 @@
                 </div>
                 <br>
                 <div style="display: flex; gap: 15px;">
-                     <a href="{{this.link_wa}}">
+                     <a href="https://wa.me/{{this.phone}}?text=Halo%20salam%20kenal">
                     <button type="button" class="btn btn-success" >
                         <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
                     </button>
@@ -151,23 +151,25 @@
             </div>
             </div>
         </div>
+        {{#each user_app}}
         <div style="margin-top: 200px; margin-bottom: 100px;" id="about">
             <div style="display: grid; justify-content: center;">
                 <h2 style="display: flex; justify-content: center;">Let's build something together</h2>
                 <p>Feel free to reach out if you're looking for a developer, have a question, or just want to connect.</p>
                 <div style="display: flex; justify-content: center;">
                     <div>
-                        <p><i class="bi bi-envelope-open"></i> galangnovi21@gmail.com</p>
+                        <p><i class="bi bi-envelope-open"></i> {{this.email}}</p>
                     </div>
                     <p style="margin-left: 20px; margin-right: 20px;">|</p>
                     <div>
                         <p style="color: green;">
-                        <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px; border-radius: 20px; background-color: green;"> 085334462008  
+                        <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px; border-radius: 20px; background-color: green;"> {{this.link_wa}}  
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+        {{/each}}
     </div>
 </main>
 {{>footer}}

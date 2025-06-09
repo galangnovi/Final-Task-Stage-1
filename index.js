@@ -139,7 +139,17 @@ app.get('/home', async (req, res) =>{
   const result3 = await db.query('SELECT * FROM public.portofolio');
   const portofolio = result3.rows;
   const result4 = await db.query('SELECT * FROM public.user_app');
-  const user_app = result4.rows;
+  const user = result4.rows;
+  const user_app= user.map( user => {
+  let phone = user.link_wa; // misalnya "085334462008"
+
+    // Ubah 08 jadi 628
+    if (phone.startsWith("0")) {
+      phone = "62" + phone.slice(1);
+    }
+    return {...user, phone}
+  })
+
   const user_active = req.session.user;
   res.render('index', { tech_icon , work_experience, portofolio, user_app, user_active});
 });
