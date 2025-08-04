@@ -26,6 +26,11 @@ const __dirname = path.dirname(__filename);
 const app = express()
 const port = 3000
 
+const serverless = require("serverless-http");
+module.exports = app;
+module.exports.handler = serverless(app);
+
+
 // app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
