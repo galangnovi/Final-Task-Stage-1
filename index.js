@@ -7,6 +7,7 @@ import bcrypt from'bcrypt'
 import flash from 'express-flash'
 import session from 'express-session'
 import multer from 'multer'
+import serverless from 'serverless-http';
 
 
 const db = new Pool({
@@ -26,9 +27,6 @@ const __dirname = path.dirname(__filename);
 const app = express()
 const port = 3000
 
-const serverless = require("serverless-http");
-module.exports = app;
-module.exports.handler = serverless(app);
 
 
 // app.use(express.json())
@@ -425,6 +423,11 @@ app.post('/profil', upload.single('image'), async (req,res) =>{
   res.redirect('/dashboard')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on http://localhost:${port}/`)
-})
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Example app listening on http://localhost:${port}/`);
+  });
+}
+
+module.exports = app;
+module.exports.handler = serverless(app);
