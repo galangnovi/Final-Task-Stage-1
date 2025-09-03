@@ -155,10 +155,10 @@ app.get('/home', async (req, res) =>{
   let phone = user.link_wa; // misalnya "085334462008"
 
     // Ubah 08 jadi 628
-    if (phone.startsWith("0")) {
+    if (phone?.startsWith("0")) {
       phone = "62" + phone.slice(1);
     }
-    return {...user, phone}
+    return { ...user, phone };
   })
 
   const user_active = req.session.user;
