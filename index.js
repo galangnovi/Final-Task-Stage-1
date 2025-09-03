@@ -7,7 +7,7 @@ import bcrypt from'bcrypt'
 import flash from 'express-flash'
 import session from 'express-session'
 import multer from 'multer'
-import pgSession from "connect-pg-simple";
+import connectPgSimple from "connect-pg-simple";
 
 
 const db = new Pool({
