@@ -7,7 +7,7 @@ import bcrypt from'bcrypt'
 import flash from 'express-flash'
 import session from 'express-session'
 import multer from 'multer'
-import serverless from 'serverless-http';
+import pgSession from "connect-pg-simple";
 
 
 const db = new Pool({
@@ -40,15 +40,19 @@ const app = express()
 app.use(express.urlencoded({extended:false}))
 
 
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'secretKey',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { 
-    secure: process.env.NODE_ENV === 'production', // hanya secure di production
-    maxAge: 1000 * 60 * 60 * 5
-  }
-}))
+const PgStore = pgSession(session);
+
+app.use(
+  session({
+    store: new PgStore({
+      conString: process.env.DATABASE_URL,
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 hari
+  })
+);
 
 app.use(flash())
 app.use((req, res, next) => {
@@ -445,5 +449,6 @@ app.post('/profil', upload.single('image'), async (req,res) =>{
 //   });
 // }
 
-module.exports = app;
-module.exports.handler = serverless(app);
+// module.exports = app;
+// module.exports.handler = serverless(app);
+export default app;
