@@ -5,10 +5,8 @@ import hbs from 'hbs'
 import { Pool } from 'pg'
 import bcrypt from'bcrypt'
 import flash from 'express-flash'
-import session from 'express-session'
 import multer from 'multer'
 import cookieSession from "cookie-session";
-import connectPgSimple from "connect-pg-simple";
 
 
 const db = new Pool({
@@ -44,7 +42,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(
   cookieSession({
     name: "session",
-    keys: ["secretKey"], // ganti dengan env SECRET_KEY
+    keys: [process.env.SESSION_SECRET || "secretKey"], // ganti dengan env SECRET_KEY
     maxAge: 24 * 60 * 60 * 1000, // 1 hari
   })
 );
