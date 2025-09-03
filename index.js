@@ -11,13 +11,20 @@ import serverless from 'serverless-http';
 
 
 const db = new Pool({
-  user: 'postgres',
-  password: 'admin',
-  host: 'localhost',
-  port: 5432,
-  database: 'final-task-1',
-  max: 20
-})
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }, // penting di Render
+  max: 20,
+});
+
+
+// const db = new Pool({
+//   user: 'postgres',
+//   password: 'admin',
+//   host: 'localhost',
+//   port: 5432,
+//   database: 'final-task-1',
+//   max: 20
+// })
 
 
 
@@ -25,7 +32,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express()
-const port = 3000
+
 
 
 
@@ -34,12 +41,12 @@ app.use(express.urlencoded({extended:false}))
 
 
 app.use(session({
-  secret: 'secretKey',
+  secret: process.env.SESSION_SECRET || 'secretKey',
   resave: false,
   saveUninitialized: true,
   cookie: { 
-    secure: false,
-    maxAge: 1000 * 60 * 60 * 5 //5 jam
+    secure: process.env.NODE_ENV === 'production', // hanya secure di production
+    maxAge: 1000 * 60 * 60 * 5
   }
 }))
 
@@ -427,11 +434,16 @@ app.post('/profil', upload.single('image'), async (req,res) =>{
   res.redirect('/dashboard')
 })
 
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(port, () => {
-    console.log(`Example app listening on http://localhost:${port}/`);
-  });
-}
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
+
+// if (process.env.NODE_ENV !== 'production') {
+//   app.listen(port, () => {
+//     console.log(`Example app listening on http://localhost:${port}/`);
+//   });
+// }
 
 module.exports = app;
 module.exports.handler = serverless(app);
