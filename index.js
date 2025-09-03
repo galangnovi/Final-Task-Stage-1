@@ -7,6 +7,7 @@ import bcrypt from'bcrypt'
 import flash from 'express-flash'
 import session from 'express-session'
 import multer from 'multer'
+import cookieSession from "cookie-session";
 import connectPgSimple from "connect-pg-simple";
 
 
@@ -40,21 +41,11 @@ const app = express()
 app.use(express.urlencoded({extended:false}))
 
 
-const PgStore = connectPgSimple(session);
-
 app.use(
-  session({
-    store: new PgStore({
-      conString: process.env.DATABASE_URL,
-      tableName: "session",
-      // trik: convert expire ke integer (epoch)
-      createTableIfMissing: false,
-      pruneSessionInterval: 60,
-    }),
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 },
+  cookieSession({
+    name: "session",
+    keys: ["secretKey"], // ganti dengan env SECRET_KEY
+    maxAge: 24 * 60 * 60 * 1000, // 1 hari
   })
 );
 
