@@ -250,14 +250,8 @@ if(isMatch){
 
 //link log out
 app.get('/logout', (req, res) => {
-  req.session.destroy(err => {
-    if (err) {
-      console.log(err);
-      // Kalau error hapus session, tetap redirect ke login saja
-      return res.redirect('/home');
-    }
-    res.redirect('/home'); // atau bisa redirect ke homepage jika mau
-  });
+  req.session = null; // hapus session dari cookie
+  res.redirect('/home');
 });
 
 // console.log(req.body)
