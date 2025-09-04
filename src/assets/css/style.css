@@ -113,10 +113,8 @@ main{
     justify-content: space-between;
 }
 .main-img{
-    width: 300px;
-    height: 300px;
-    box-shadow: 1px 1px 15px rgb(35, 35, 94);
-    border-radius: 10px;
+    /* box-shadow: 1px 1px 15px rgb(35, 35, 94);
+    border-radius: 10px; */
     gap: 90px;
     transition: transform 0.5s ease;
    
