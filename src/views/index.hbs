@@ -17,38 +17,41 @@
     <div class="container-bd">
         {{#each user_app}}
         <div class="main-hero">
+            
+            <div class="cont-1">
+                <div class="sub-cont">
+                    <span style="display: flex; gap: 20px;">
+                    <h1>Hi I'm {{this.name}}</h1>
+                    <img class="hello-img" src="/assets/img/hello.png" alt="">
+                    </span>
+                    <p class="sub-title">{{this.profession}}</p>
+                    <br>
+                    <p class="profil-content">{{this.description}}</p>
+                    <a class="profil-content" href="{{this.link_location}}" style="text-decoration: none; color:inherit;">
+                        <i class="bi bi-geo-alt"></i> {{this.location}}
+                    </a>
+                    <div>
+                        <p class="profil-content">
+                        <img src="assets/img/dot.png" alt="" style="width: 20px; height: 20px; margin-right: 10px;">available for new project
+                        </p>
+                    </div>
+                    <br>
+                    <div style="display: flex; justify-content: center; gap: 50px;">
+                        <a href="https://wa.me/{{this.phone}}?text=Halo%20salam%20kenal">
+                        <button type="button" class="btn btn-success" style="border-radius: 12px !important; padding: 10px 20px !important; font-weight: 600; transition: transform 0.2s ease; box-shadow 0.2s ease;" >
+                            <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
+                        </button>
+                        </a>
+                        <a href="{{this.link_cv}}">
+                            <button type="button" class=" btn btn-dark" style="border-radius: 12px !important; padding: 10px 20px !important; font-weight: 600; transition: transform 0.2s ease; box-shadow 0.2s ease;">
+                                <i class="bi bi-file-earmark-arrow-down"></i> Download CV
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="" style=" display: flex; align-items: center; gap: 90px;">
                 <img class="main-img" src="/assets/uploads/{{this.image}}" alt="">
-            </div>
-            <div class="cont-1">
-                <span style="display: flex; gap: 20px;">
-                <h1>Hi I'm {{this.name}}</h1>
-                <img class="hello-img" src="/assets/img/hello.png" alt="">
-                </span>
-                <p class="sub-title">{{this.profession}}</p>
-                <br>
-                <p class="profil-content">{{this.description}}</p>
-                <a class="profil-content" href="{{this.link_location}}" style="text-decoration: none; color:inherit;">
-                    <i class="bi bi-geo-alt"></i> {{this.location}}
-                </a>
-                <div>
-                    <p class="profil-content">
-                    <img src="assets/img/dot.png" alt="" style="width: 20px; height: 20px; margin-right: 10px;">available for new project
-                    </p>
-                </div>
-                <br>
-                <div style="display: flex; gap: 15px;">
-                     <a href="https://wa.me/{{this.phone}}?text=Halo%20salam%20kenal">
-                    <button type="button" class="btn btn-success" >
-                        <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
-                    </button>
-                </a>
-                <a href="{{this.link_cv}}">
-                    <button type="button" class="btn btn-dark">
-                        <i class="bi bi-file-earmark-arrow-down"></i> Download CV
-                    </button>
-                </a>
-                </div>
             </div>
         </div>
         {{/each}}
@@ -176,5 +179,21 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>  -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 <script src="/assets/JS/script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const img = document.querySelector(".main-img");
+  if (!img) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        img.classList.add("show");
+      }
+    });
+  });
+
+  observer.observe(img);
+});
+</script>
 </body>
 </html>
