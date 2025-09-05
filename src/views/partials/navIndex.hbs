@@ -1,45 +1,42 @@
-<nav class="navbar navbar-expand-lg" style="position: fixed; top: 0; right: 0;left: 0; z-index: 1000; height: 70px; background-color: inherit;">
-    <div class="container-fluid">
-        <ul class="navbar-nav" style="display: flex; justify-content:space-between; margin-left:150px">
-        <li class="nav-item dropdown" > 
-          <a class=" nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
-            <img src="assets/img/gna.png" alt="Logo Dumbways" style="height: 90px; padding-left: 20px;">
-          </a>
-          <ul class="dropdown-menu" style="transform: translateY(-20px);">
-            {{#if user_active}}
-            <li><a class="dropdown-item" href="/logout">Logout</a></li>
-            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-            {{else}}
-            <li><a class="dropdown-item" href="/login">Login</a></li>
-            <li><a class="dropdown-item" href="#about">about</a></li>
-            {{/if}}
-          </ul>
-        </li>
-        </ul>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="justify-content: end; margin-right: 150px; gap: 15px;">
-            <div class="navbar-nav" style="gap: 15px;">
-                <a class="nav-link active-hover" aria-current="page" href="#tech-stack">Tech Stack</a>
-                <a class="nav-link active-hover" aria-current="page" href="#work-experience">Work Experience</a>
-                <a class="nav-link active-hover" href="#my-project">My Project</a>
-            </div>
-            {{#each user_app}}
-            <div style="display: flex; gap: 15px;">
-                <a href=" https://wa.me/{{this.link_wa}}?text=Halo,%20Salam%20Kenal" style="text-decoration: none;">
-                    <button type="button" class="btn btn-success" >
-                        <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
-                    </button>
-                </a>
-                <a href="{{this.link_cv}}">
-                    <button type="button" class="btn btn-dark">
-                        <i class="bi bi-file-earmark-arrow-down"></i> Download CV
-                    </button>
-                </a>
-                <button type="button" class="btn" id="toggleBtn"></button>
-            </div>
-            {{/each}}
-        </div>
+<nav class="navbar navbar-expand-lg" 
+     style="position: fixed; top: 0; right: 0; left: 0; z-index: 1000; height: 70px; background-color: inherit;">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" style="margin-left: 8%;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="assets/img/gna.png" alt="Logo Dumbways" style="max-height: 80px; width: auto;">
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" 
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse justify-content-end" style="margin-right: 8%;" id="navbarNavAltMarkup">
+      <div class="navbar-nav" style="gap: 15px;">
+        <a class="nav-link active-hover" aria-current="page" href="#tech-stack">Tech Stack</a>
+        <a class="nav-link active-hover" aria-current="page" href="#work-experience">Work Experience</a>
+        <a class="nav-link active-hover" href="#my-project">My Project</a>
+      </div>
+
+      {{#each user_app}}
+      <div class="d-flex gap-2 ms-lg-3 mt-2 mt-lg-0">
+        <a href="https://wa.me/{{this.link_wa}}?text=Halo,%20Salam%20Kenal" style="text-decoration: none;">
+          <button type="button" class="btn btn-success">
+            <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
+          </button>
+        </a>
+        <a href="{{this.link_cv}}">
+          <button type="button" class="btn btn-dark">
+            <i class="bi bi-file-earmark-arrow-down"></i> Download CV
+          </button>
+        </a>
+        <button type="button" class="btn" id="toggleBtn"></button>
+      </div>
+      {{/each}}
     </div>
-</nav>    
+  </div>
+</nav>

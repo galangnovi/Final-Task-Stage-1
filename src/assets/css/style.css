@@ -1,12 +1,15 @@
 body{
     font-family: 'Poppins', sans-serif !important;
+    overflow-x: hidden;
+
 }
 main{
     padding: 100px 15% 10px 15% ;
 }
 .card{
-    width: 500px !important;
-    min-width: 350px !important;
+    flex: 1 1 calc(100% - 20px); /* default: full width */
+    max-width: 500px;            /* batas maksimal */
+    min-width: 280px;            /* agar tidak terlalu kecil */
     /* border-radius: 15px !important; */
     margin-bottom: 20px;
     /* background-color: rgba(233, 233, 239, 0.1) !important;
@@ -221,4 +224,123 @@ h1 {
      0%   { transform: translateX(0);  }
     100% { transform: translateX(-50%) ;  }
     
+}
+
+/* =======================
+   Responsive Layout
+   ======================= */
+
+/* Tablet (<= 992px) */
+@media (max-width: 992px) {
+  main {
+    padding: 80px 5% 10px 5%;
+  }
+
+  .main-hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .cont-1 {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .main-img {
+    width: 300px;
+  }
+
+  .card {
+    width: 100% !important;
+    max-width: 450px !important;
+  }
+
+  .navbar-nav {
+    margin-left: 0 !important;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .cont-1 > span > h1 {
+    font-size: 40px;
+  }
+
+  .sub-title {
+    font-size: 20px;
+  }
+
+  .profil-content {
+    font-size: 0.95rem;
+  }
+
+  .main-img {
+    width: 260px;
+  }
+
+  .container-techno {
+    gap: 25px;
+  }
+
+  .container-img {
+    width: 50px;
+    height: 50px;
+  }
+
+
+  .work-style {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .icn-experience {
+    font-size: 13px;
+    padding: 2px 10px;
+  }
+
+  .hello-img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+/* Small Mobile (<= 480px) */
+@media (max-width: 480px) {
+  .cont-1 > span > h1 {
+    font-size: 32px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .main-img {
+    width: 220px;
+  }
+
+  .btn {
+    padding: 8px 16px !important;
+    font-size: 14px;
+  }
+
+  .card {
+    max-width: 100% !important;
+  }
+
+  .container-techno {
+    gap: 15px;
+  }
+
+  .container-img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .techno_font {
+    font-size: 10px;
+  }
 }
