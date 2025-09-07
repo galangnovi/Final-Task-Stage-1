@@ -4,7 +4,7 @@ main{
     margin: 80px 100px 80px 100px;
     border-radius: 20px;
     background-color: rgb(255, 255, 255, 0.99);
-    
+
 }
 
 #exampleInputEmail1{
@@ -79,4 +79,89 @@ form{
 html,body{
     height: 100%;
     position: relative;
+}
+
+/* Responsive Design */
+
+/* Tablet (<= 992px) */
+@media (max-width: 992px) {
+  main {
+    width: 80%;
+    margin: 60px auto;
+    height: auto;
+    min-height: 400px;
+  }
+
+  form {
+    width: 50%;
+    margin-left: 15px;
+  }
+
+  .login-box {
+    margin-left: 15px;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  main {
+    width: 90%;
+    margin: 40px auto;
+    height: auto;
+    min-height: 350px;
+    padding: 20px;
+  }
+
+  .container-login {
+    flex-direction: column;
+  }
+
+  .login-box {
+    margin-left: 0;
+    margin-top: 15px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  form {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 15px;
+    padding: 0;
+  }
+
+  #exampleInputEmail1,
+  #exampleInputPassword1 {
+    font-size: 14px;
+    height: 45px;
+    padding-left: 35px;
+    background-size: 20px 20px;
+    background-position: 8px center;
+  }
+
+  .mb-3 {
+    margin-bottom: 15px;
+  }
+}
+
+/* Small Mobile (<= 480px) */
+@media (max-width: 480px) {
+  main {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  #exampleInputEmail1,
+  #exampleInputPassword1 {
+    font-size: 12px;
+    height: 40px;
+    padding-left: 30px;
+    background-size: 18px 18px;
+    background-position: 6px center;
+  }
+
+  .mb-3 {
+    margin-bottom: 10px;
+  }
 }

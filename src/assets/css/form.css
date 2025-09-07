@@ -33,15 +33,15 @@ label{
     font-weight: bold;
 }
 .tech-direction{
-    display: flex; 
-    flex-direction: row; 
-    gap: 30px; 
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
     flex-wrap: wrap;
     margin-bottom: 30px;
 }
 .position-form{
-    display: flex; 
-    flex-direction: row; 
+    display: flex;
+    flex-direction: row;
     gap: 30px;
     justify-content: space-between;
 }
@@ -55,5 +55,94 @@ label{
 
 .img-preview{
     width: 100px;
+}
+
+/* Responsive Design */
+
+/* Tablet (<= 992px) */
+@media (max-width: 992px) {
+  main {
+    padding: 50px 10% 10px 10% !important;
+  }
+
+  form {
+    padding: 20px 50px 20px 50px;
+  }
+
+  .tech-direction {
+    gap: 20px;
+  }
+
+  .position-form {
+    gap: 20px;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  main {
+    padding: 50px 5% 10px 5% !important;
+  }
+
+  .container-title {
+    margin-bottom: 40px;
+  }
+
+  form {
+    padding: 20px 20px 20px 20px;
+  }
+
+  .tech-direction {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .position-form {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .mb-form {
+    width: 100%;
+  }
+
+  .img-preview {
+    width: 80px;
+  }
+}
+
+/* Small Mobile (<= 480px) */
+@media (max-width: 480px) {
+  main {
+    padding: 30px 5% 10px 5% !important;
+  }
+
+  .container-title {
+    margin-bottom: 30px;
+  }
+
+  form {
+    padding: 15px 15px 15px 15px;
+  }
+
+  .tech-direction {
+    gap: 10px;
+  }
+
+  .position-form {
+    gap: 10px;
+  }
+
+  .mb-form {
+    margin-bottom: 20px;
+  }
+
+  .mb-3 {
+    margin-bottom: 20px;
+  }
+
+  .img-preview {
+    width: 60px;
+  }
 }
 

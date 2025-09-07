@@ -25,7 +25,40 @@ if (isDark) {
     btn.innerHTML = '<i class="bi bi-brightness-high"></i>';
     localStorage.setItem('mode', 'light');
     }
-}); 
+});
+
+// Animation triggers on scroll
+document.addEventListener("DOMContentLoaded", () => {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animation elements
+    const animateElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');
+    animateElements.forEach(el => observer.observe(el));
+
+    // Existing main image observer
+    const img = document.querySelector(".main-img");
+    if (img) {
+        const imgObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    img.classList.add("show");
+                }
+            });
+        });
+        imgObserver.observe(img);
+    }
+});
 
 // const icon = document.getElementById('icon');
 //     let isDragging = false;

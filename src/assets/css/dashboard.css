@@ -26,3 +26,63 @@ body a{
     border-radius: 20px !important;
     background-color: aqua !important;
 }
+
+/* Responsive Design */
+
+/* Tablet (<= 992px) */
+@media (max-width: 992px) {
+  .container-view {
+    gap: 20px;
+  }
+
+  .table-responsive {
+    font-size: 14px;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .container-view {
+    gap: 15px;
+    flex-direction: column;
+  }
+
+  .table-responsive {
+    font-size: 12px;
+  }
+
+  .icon-plus {
+    width: 30px;
+  }
+
+  /* Override inline width for work experience cards */
+  main div[style*="width:1000px"] {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  main div[style*="width:1000px"] > div:nth-child(2) {
+    width: 100% !important;
+  }
+
+  main div[style*="width:1000px"] > div:nth-child(3) {
+    width: auto !important;
+    margin-top: 10px;
+  }
+}
+
+/* Small Mobile (<= 480px) */
+@media (max-width: 480px) {
+  .container-view {
+    gap: 10px;
+  }
+
+  .table-responsive {
+    font-size: 10px;
+  }
+
+  .icon-plus {
+    width: 25px;
+  }
+}

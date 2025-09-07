@@ -14,15 +14,15 @@
 {{>navIndex}}
 <!-- main section -->
 <main>
-    <div class="container-bd">
+    <div class="container-bd fade-in-up">
         {{#each user_app}}
-        <div class="main-hero">
+        <div class="main-hero fade-in-left">
             
             <div class="cont-1">
                 <div class="sub-cont">
                     <span style="display: flex; gap: 20px;">
                     <h1>Hi I'm {{this.name}}</h1>
-                    <img class="hello-img" src="/assets/img/hello.png" alt="">
+                    <img class="hello-img pulse" src="/assets/img/hello.png" alt="">
                     </span>
                     <p class="sub-title">{{this.profession}}</p>
                     <br>
@@ -38,12 +38,12 @@
                     <br>
                     <div style="display: flex; justify-content: center; gap: 50px;">
                         <a href="https://wa.me/{{this.phone}}?text=Halo%20salam%20kenal">
-                        <button type="button" class="btn btn-success" style="border-radius: 12px !important; padding: 10px 20px !important; font-weight: 600; transition: transform 0.2s ease; box-shadow 0.2s ease;" >
+                        <button type="button" class="btn btn-success glow" style="border-radius: 12px !important; padding: 10px 20px !important; font-weight: 600; transition: transform 0.2s ease; box-shadow 0.2s ease;" >
                             <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
                         </button>
                         </a>
                         <a href="{{this.link_cv}}">
-                            <button type="button" class=" btn btn-dark" style="border-radius: 12px !important; padding: 10px 20px !important; font-weight: 600; transition: transform 0.2s ease; box-shadow 0.2s ease;">
+                            <button type="button" class=" btn btn-dark glow" style="border-radius: 12px !important; padding: 10px 20px !important; font-weight: 600; transition: transform 0.2s ease; box-shadow 0.2s ease;">
                                 <i class="bi bi-file-earmark-arrow-down"></i> Download CV
                             </button>
                         </a>
@@ -61,16 +61,16 @@
             <div class="container-scroll">
                 <div class="container-techno" style="display: flex; justify-content: space-around; margin: 60px 0 60px 0;">
                     {{#each tech_icon}}
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
+                    <div class="container-dp-techno fade-in-up" id="icon">
+                        <div class="container-img pulse">
                             <img src="../assets/uploads/{{this.icon_image}}" alt="" class="Techno">
                         </div>
                         <h10 class="techno-font">{{this.name}}</h10>
                     </div>
                     {{/each}}
                     {{#each tech_icon}}
-                    <div class="container-dp-techno" id="icon">
-                        <div class="container-img">
+                    <div class="container-dp-techno fade-in-up" id="icon">
+                        <div class="container-img pulse">
                             <img src="../assets/uploads/{{this.icon_image}}" alt="" class="Techno">
                         </div>
                         <h10 class="techno-font">{{this.name}}</h10>
@@ -80,7 +80,7 @@
             </div>         
         </div>
         </div>
-        <div id="work-experience" class="container-work">
+        <div id="work-experience" class="container-work fade-in-right">
             <h1 style="margin-top: 100px; margin-bottom: 50px;" >Work Experience</h1>
             {{#each work_experience}}
             <div class="work-style" style="display: flex; border-radius: 7px; box-shadow:0.2px 0.2px 1px black; padding: 10px 20px 10px 20px; justify-content: space-between; margin-bottom: 20px;">
@@ -113,7 +113,7 @@
             <div style="display: flex;justify-content: space-between; flex-wrap: wrap; gap:20px;">
                 {{#if portofolio.length}}
                 {{#each portofolio}}
-                <div class="card">
+                <div class="card fade-in-up">
                     <div class="card-frame-img">
                         <img src="../assets/uploads/{{this.image}}" class="card-img-top" alt="...">
                     </div>
