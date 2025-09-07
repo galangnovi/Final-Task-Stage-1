@@ -291,10 +291,10 @@ app.post('/work', upload.single('image'), async (req,res) =>{
     ? tech
     : [tech].filter(Boolean); // handle 1 atau lebih value
   const result = await db.query(
-    `INSERT INTO public.work_experience (position, company, start_date, end_date, description, tech, image) 
+    `INSERT INTO public.work_experience (position, company, start_date, end_date, description, tech, image)
     VALUES ($1,$2,$3,$4,$5,$6,$7)
     Returning id`,
-    [position, company, start_date, end_date, desc, techno, image]
+    [position, company, start_date, end_date, JSON.stringify(desc), JSON.stringify(techno), image]
   );
   const query = 'select * from public.work_experience';
   const results = await db.query(query);
@@ -337,9 +337,9 @@ app.post('/work/:id/detail', upload.single('image'), async (req,res) =>{
           end_date = $4,
           description = $5,
           tech = $6,
-          image = COALESCE ($7, image) 
+          image = COALESCE ($7, image)
      WHERE id =$8;`,
-    [position, company, start_date, end_date, desc, techno,image, id]
+    [position, company, start_date, end_date, JSON.stringify(desc), JSON.stringify(techno),image, id]
   );
   res.redirect('/dashboard')
 })
@@ -359,9 +359,9 @@ app.post('/portofolio', upload.single('image'), async (req,res) =>{
     ? tech
     : [tech].filter(Boolean); // handle 1 atau lebih value
   const result = await db.query(
-    `INSERT INTO public.portofolio (name, description, techno, git_url, demo_url, image) 
+    `INSERT INTO public.portofolio (name, description, techno, git_url, demo_url, image)
     VALUES ($1,$2,$3,$4,$5,$6)`,
-    [name, description, techno, git, demo, image]
+    [name, description, JSON.stringify(techno), git, demo, image]
   );
   res.redirect('/dashboard')
 })
@@ -394,7 +394,7 @@ app.post('/portofolio/:id/detail', upload.single('image'), async (req,res) =>{
           demo_url = $5,
           image = COALESCE ($6, image) 
      WHERE id =$7;`,
-    [name, description, techno, git, demo, image, id]
+    [name, description, JSON.stringify(techno), git, demo, image, id]
   );
   res.redirect('/dashboard')
 })
