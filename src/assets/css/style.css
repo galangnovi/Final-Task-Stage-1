@@ -122,7 +122,7 @@ main{
 }
 
 .font-card{
-    font-size: 14px !important;
+    font-size: 13px !important;
 }
     
 .Techno{
@@ -216,9 +216,9 @@ h1 {
 }
 .icn-experience{
     background-color: rgba(126, 123, 123, 0.3);
-    padding: 0px 15px 3px 15px;
+    padding: 3px 15px 3px 15px;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 12px;
 }
 @keyframes slide {
      0%   { transform: translateX(0);  }
