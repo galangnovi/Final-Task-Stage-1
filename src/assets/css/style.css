@@ -121,6 +121,24 @@ main{
     font-size: 15px !important;
 }
 
+.typing {
+  overflow: hidden; 
+  border-right: .15em solid #38bdf8; 
+  white-space: nowrap;
+  width: 0;
+  animation: typing 3s steps(30, end) forwards, blink .7s infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: #38bdf8; }
+}
+
 .font-card{
     font-size: 13px !important;
 }
