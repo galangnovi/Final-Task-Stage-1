@@ -11,21 +11,21 @@ import cloudinary from 'cloudinary'
 import { CloudinaryStorage } from 'multer-storage-cloudinary'
 
 
-const db = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }, // penting di Render
-  max: 20,
-});
-
-
 // const db = new Pool({
-//   user: 'postgres',
-//   password: 'admin',
-//   host: 'localhost',
-//   port: 5432,
-//   database: 'final-task-1',
-//   max: 20
-// })
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: { rejectUnauthorized: false }, // penting di Render
+//   max: 20,
+// });
+
+
+const db = new Pool({
+  user: 'postgres',
+  password: 'admin',
+  host: 'localhost',
+  port: 5432,
+  database: 'final-task-1',
+  max: 20
+})
 
 
 

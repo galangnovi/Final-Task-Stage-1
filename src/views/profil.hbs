@@ -18,7 +18,7 @@
         {{#each user_app}}
         <div class="main-hero">
             <div class="" style=" display: flex; align-items: center; gap: 90px;">
-                <img class="main-img" src="{{this.image}}" alt="">
+                <img class="main-img" src={{this.image}} alt="">
             </div>
             <div class="cont-1">
                 <span style="display: flex; flex-direction:column;">
@@ -26,21 +26,25 @@
                 <h4>{{this.email}}</h4>
                 </span>
                 <br>
-                <p class="sub-h1">{{this.profession}}</p>
-                <p>{{this.description}}</p>
+                <div>
+                    <p class="sub-h1">{{this.profession}}</p>
+                    <p>{{this.description}}</p>
+                </div>
+                
                 <div style="text-decoration: none; color:inherit;">
                     <i class="bi bi-geo-alt"></i> LINK LOCATION : {{this.location}}
                 </div>
                 <br>
-                <div class="">
+                <div style="display: flex; flex-direction: column;">
                     <p>
                     <img src="assets/img/dot.png" alt="" style="width: 20px; height: 20px; margin-right: 10px;"> LINK : {{this.link_location}}
                     </p>
-                </div>
-                <div style="display: flex; flex-direction:column;">
+                     <div style="display: flex; flex-direction: column;">
                         <p>WA : {{this.link_wa}}</p>
                         <p>LINK CV : {{this.link_cv}}</p>
+                    </div>
                 </div>
+               
             </div>
         </div>
         {{/each}}
