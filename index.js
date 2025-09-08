@@ -68,10 +68,23 @@ cloudinary.v2.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary.v2,
-  params: {
-    folder: 'personal-web',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-    transformation: [{ width: 800, height: 800, crop: 'limit' }],
+  params: async (req, file) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+
+    // Kalau gif, jangan resize
+    if (ext === ".gif") {
+      return {
+        folder: "personal-web",
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "webp"],
+      };
+    }
+
+    // Selain gif boleh resize
+    return {
+      folder: "personal-web",
+      allowed_formats: ["jpg", "jpeg", "png", "gif", "webp"],
+      transformation: [{ width: 800, height: 800, crop: "limit" }],
+    };
   },
 });
 
