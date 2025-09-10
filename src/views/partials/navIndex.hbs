@@ -24,9 +24,9 @@
 
       {{#each user_app}}
       <div class="d-flex gap-2 ms-lg-3 mt-2 mt-lg-0">
-        <a href="https://wa.me/{{this.link_wa}}?text=Halo,%20Salam%20Kenal" style="text-decoration: none;">
+        <a href="mailto:{{this.email}}?subject=Permintaan%20Informasi&body=Halo%2C%0ASaya%20ingin%20bertanya%20tentang" style="text-decoration: none;">
           <button type="button" class="btn btn-success">
-            <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px;"> Let's Talk
+            <img src="assets/img/email.png" alt="" style="width: 20px;height: 20px;"> Contact Me
           </button>
         </a>
         <a href="{{this.link_cv}}">
