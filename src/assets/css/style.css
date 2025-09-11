@@ -635,3 +635,47 @@ html {
 .card:nth-child(even) {
   animation-delay: 0.2s;
 }
+
+/* Tambahan khusus layar kecil <= 480px */
+@media (max-width: 480px) {
+  main {
+    padding: 60px 20px 10px 20px !important;
+  }
+
+  .main-hero {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 30px !important;
+  }
+
+  .cont-1 {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .cont-1 > span > h1 {
+    font-size: 28px !important;
+  }
+
+  .profil-content {
+    font-size: 14px !important;
+  }
+
+  .main-img {
+    width: 200px !important;
+  }
+
+  /* Button container */
+  .cont-1 > .sub-cont > div:last-child {
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+
+  .btn {
+    width: 100% !important;
+    padding: 10px !important;
+    font-size: 14px !important;
+  }
+}
+
