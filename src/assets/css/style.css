@@ -419,8 +419,42 @@ h1 {
 }
 
 
-/* Extra Small Mobile (<= 375px) - iPhone specific */
 @media (max-width: 375px) {
+  main {
+    padding: 20px 15px 15px 15px;
+  }
+
+  .cont-1 > span > h1 {
+    font-size: 22px;
+  }
+
+  .sub-title {
+    font-size: 16px;
+  }
+
+  .main-img {
+    width: 150px;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 220px;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .main-hero {
+    gap: 15px;
+  }
+
+  .profil-content {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* Extra Small Mobile (<= 375px) - iPhone specific */
+/* @media (max-width: 375px) {
   main {
     padding: 10px 5% 5px 5%;
   }
@@ -514,7 +548,7 @@ h1 {
   .container-imgtools img {
     width: 60px;
   }
-}
+} */
 
 /* Additional Modern Animations and Styles */
 
