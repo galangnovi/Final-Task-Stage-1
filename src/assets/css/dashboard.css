@@ -86,3 +86,47 @@ body a{
     width: 25px;
   }
 }
+
+/* Extra Small Mobile (<= 375px) - iPhone specific */
+@media (max-width: 375px) {
+  .container-view {
+    gap: 8px;
+  }
+
+  .table-responsive {
+    font-size: 9px;
+  }
+
+  .icon-plus {
+    width: 20px;
+  }
+
+  /* Override inline width for work experience cards */
+  main div[style*="width:1000px"] {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 10px !important;
+  }
+
+  main div[style*="width:1000px"] > div:nth-child(2) {
+    width: 100% !important;
+    margin-top: 8px;
+  }
+
+  main div[style*="width:1000px"] > div:nth-child(3) {
+    width: auto !important;
+    margin-top: 8px;
+  }
+
+  /* Table adjustments */
+  .table th, .table td {
+    padding: 4px 6px;
+  }
+
+  /* Button adjustments */
+  .btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}

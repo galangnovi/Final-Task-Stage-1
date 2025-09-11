@@ -55,7 +55,7 @@
     <div class="container-view" style="gap:0px">
     {{#each work_experience}}
     <a href="/work/{{this.id}}/detail">
-        <div style="display: flex; border-radius: 7px; box-shadow: 0.5px 0.5px 5px black; padding: 10px 20px 10px 20px; justify-content: space-between; margin-bottom: 20px; width:1000px">
+        <div style="display: flex; border-radius: 7px; box-shadow: 0.5px 0.5px 5px black; padding: 10px 20px 10px 20px; justify-content: space-between; margin-bottom: 20px; width:1000px; max-width: 100%; flex-wrap: wrap;">
             <div class="container-imgtools" style="width: 100px;">
             <img src="{{this.image}}" alt="" style="width: 80px;">
             </div>
@@ -67,7 +67,7 @@
                 <li>{{this}}</li>
                 {{/each}}
             </ul>
-            <div style="display: flex; gap: 10px;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 {{#each tech}}
                 <p class="icn-experience">{{this}}</p>
                 {{/each}}

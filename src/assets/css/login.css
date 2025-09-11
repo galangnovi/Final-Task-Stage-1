@@ -165,3 +165,57 @@ html,body{
     margin-bottom: 10px;
   }
 }
+
+/* Extra Small Mobile (<= 375px) - iPhone specific */
+@media (max-width: 375px) {
+  main {
+    width: 98%;
+    margin: 15px auto;
+    padding: 10px;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .login-box {
+    margin-left: 5px;
+    margin-top: 10px;
+  }
+
+  form {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+    padding: 0 5px;
+  }
+
+  #exampleInputEmail1,
+  #exampleInputPassword1 {
+    font-size: 11px;
+    height: 35px;
+    padding-left: 25px;
+    background-size: 16px 16px;
+    background-position: 5px center;
+  }
+
+  .mb-3 {
+    margin-bottom: 8px;
+  }
+
+  .btn {
+    padding: 6px 80px;
+    font-size: 12px;
+  }
+
+  img[alt="Galang's PERSONAL WEB LOGIN PORTAL"] {
+    width: 70px;
+    margin-right: -15px;
+  }
+
+  .login-box img:first-child {
+    width: 100px;
+  }
+
+  .login-box img[alt="login-ilustration.jpg"] {
+    width: 350px;
+  }
+}

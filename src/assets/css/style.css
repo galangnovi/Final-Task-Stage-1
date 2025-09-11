@@ -367,6 +367,103 @@ h1 {
   }
 }
 
+/* Extra Small Mobile (<= 375px) - iPhone specific */
+@media (max-width: 375px) {
+  main {
+    padding: 10px 5% 5px 5%;
+  }
+
+  .cont-1 > span > h1 {
+    font-size: 28px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .sub-title {
+    font-size: 18px;
+  }
+
+  .main-img {
+    width: 200px;
+  }
+
+  .btn {
+    padding: 6px 12px !important;
+    font-size: 12px;
+  }
+
+  .card {
+    max-width: 100% !important;
+    margin-bottom: 15px;
+  }
+
+  .container-techno {
+    gap: 10px;
+  }
+
+  .container-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .techno_font {
+    font-size: 9px;
+  }
+
+  .work-style {
+    padding: 8px 15px;
+    margin-bottom: 15px;
+  }
+
+  .title-font {
+    font-size: 18px;
+  }
+
+  .company-font {
+    font-size: 14px;
+  }
+
+  .font-exp {
+    font-size: 14px;
+  }
+
+  .icn-experience {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+
+  .hello-img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .profil-content {
+    font-size: 0.9rem;
+  }
+
+  .main-hero {
+    gap: 30px;
+  }
+
+  .cont-1 {
+    width: 100%;
+  }
+
+  .container-dp-techno {
+    width: 90px;
+  }
+
+  .container-imgtools {
+    width: 80px;
+  }
+
+  .container-imgtools img {
+    width: 60px;
+  }
+}
+
 /* Additional Modern Animations and Styles */
 
 /* Keyframes for animations */
