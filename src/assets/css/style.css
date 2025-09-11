@@ -385,15 +385,28 @@ h1 {
     align-items: center;
   }
 
+  .cont-1 > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
   .cont-1 > span > h1 {
     font-size: 26px;
     line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .profil-content {
     font-size: 14px;
     line-height: 1.6;
     text-align: justify;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .main-img {
