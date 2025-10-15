@@ -37,23 +37,6 @@ const __dirname = path.dirname(__filename);
 
 const app = express()
 
-async function connectWithRetry(retries = 5, delay = 3000) {
-  for (let i = 0; i < retries; i++) {
-    try {
-      await db.query('SELECT 1');
-      console.log('✅ Database connected');
-      return;
-    } catch (err) {
-      console.error(`❌ DB connection failed (attempt ${i + 1}):`, err.message);
-      if (i < retries - 1) await new Promise(r => setTimeout(r, delay));
-    }
-  }
-  console.error('🚨 Database connection failed permanently.');
-}
-
-connectWithRetry();
-
-
 
 // app.use(express.json())
 app.use(express.urlencoded({extended:false}))
@@ -476,6 +459,22 @@ app.post('/profil', upload.single('image'), async (req,res) =>{
 
 // module.exports = app;
 // module.exports.handler = serverless(app);
+async function connectWithRetry(retries = 5, delay = 3000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await db.query('SELECT 1');
+      console.log('✅ Database connected');
+      return;
+    } catch (err) {
+      console.error(`❌ DB connection failed (attempt ${i + 1}):`, err.message);
+      if (i < retries - 1) await new Promise(r => setTimeout(r, delay));
+    }
+  }
+  console.error('🚨 Database connection failed permanently.');
+}
+
+connectWithRetry();
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`✅ Server running on port ${port}`);
