@@ -14,9 +14,12 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary'
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }, // penting di Render
-  max: 20,
+  max: 5,
 });
 
+db.connect()
+  .then(() => console.log('✅ PostgreSQL connected successfully'))
+  .catch(err => console.error('❌ PostgreSQL connection error:', err));
 
 // const db = new Pool({
 //   user: 'postgres',
@@ -34,6 +37,21 @@ const __dirname = path.dirname(__filename);
 
 const app = express()
 
+async function connectWithRetry(retries = 5, delay = 3000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await db.query('SELECT 1');
+      console.log('✅ Database connected');
+      return;
+    } catch (err) {
+      console.error(`❌ DB connection failed (attempt ${i + 1}):`, err.message);
+      if (i < retries - 1) await new Promise(r => setTimeout(r, delay));
+    }
+  }
+  console.error('🚨 Database connection failed permanently.');
+}
+
+connectWithRetry();
 
 
 
