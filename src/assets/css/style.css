@@ -384,11 +384,16 @@ h1 {
   }
 
   .card{
-    width: 100%;
+    width: 80%;
   }
   .sub-cont > div {
     display: flex;
     justify-content: center;
+  }
+
+  .flex{
+    display: flex;
+    flex-direction: column;
   }
 
   .sub-cont > div > a {
@@ -410,7 +415,7 @@ h1 {
   }
 
   .footer-text{
-    font-size: 3px !important;
+    font-size: 5px !important;
   }
   .text-sizing {
     font-size: 13px !important;
