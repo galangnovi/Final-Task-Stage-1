@@ -390,13 +390,17 @@ h1 {
   }
  
   .card-frame-img{
-    height: 100px;
+    height: 120px;
   }
   .flex{
     display: flex;
+    justify-content: center;
     flex-direction: column;
   }
 
+  .hid{
+    display:none;
+  }
   .sub-cont > div > a {
     width: 100%;
   }
