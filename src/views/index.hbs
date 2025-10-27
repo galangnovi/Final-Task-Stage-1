@@ -32,14 +32,14 @@
                     </a>
                     <div>
                         <p class="profil-content">
-                        <img src="assets/img/dot.png" alt="" style="width: 20px; height: 20px; margin-right: 10px;">available for new project
+                            <img src="assets/img/dot.png" alt="" style="width: 20px; height: 20px; margin-right: 10px;">available for new project
                         </p>
                     </div>
                     <br>
                     <div style="display: flex; justify-content: center; gap: 50px;">
                         <a href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to={{this.email}}">
                         <button type="button" class="btn btn-success glow" style="border-radius: 12px !important; padding: 10px 20px !important; font-weight: 600; transition: transform 0.2s ease; box-shadow 0.2s ease;" >
-                            <img src="assets/img/email.png" alt="" style="width: 20px;height: 20px;"> Contact Me
+                            <i class="bi bi-envelope-arrow-up"></i> Contact Me
                         </button>
                         </a>
                         <a href="{{this.link_cv}}">
@@ -87,7 +87,7 @@
                 <div class="container-imgtools" style="width: 100px;">
                 <img src="{{this.image}}" alt="" style="width: 80px;">
                 </div>
-                <div style="width: 70%;">
+                <div class="padding-text">
                 <h4 class="title-font" style="margin-bottom: 0;">{{this.position}}</h4>
                 <p class="company-font" style="color: green;font-size: small;">{{this.company}}</p>
                 <ul style="list-style: disc; ">
@@ -157,16 +157,16 @@
         {{#each user_app}}
         <div style="margin-top: 200px; margin-bottom: 100px;" id="about">
             <div style="display: grid; justify-content: center;">
-                <h2 style="text-align: center;">Let's build something together</h2>
-                <p style="text-align: center;">Feel free to reach out if you're looking for a developer, have a question, or just want to connect.</p>
+                <h2 class="text-sizing" style="text-align: center;">Let's build something together</h2>
+                <p class="text-sizing" style="text-align: center;">Feel free to reach out if you're looking for a developer, have a question, or just want to connect.</p>
                 <div style="display: flex; justify-content: center;">
                     <div>
-                        <p><i class="bi bi-envelope-open"></i> {{this.email}}</p>
+                        <p class="text-sizing"><i class="bi bi-envelope-open icon-size"></i> {{this.email}}</p>
                     </div>
                     <p style="margin-left: 20px; margin-right: 20px;">|</p>
                     <div>
-                        <p style="color: green;">
-                        <img src="assets/img/whatsapp.png" alt="" style="width: 20px;height: 20px; border-radius: 20px; background-color: green;"> {{this.link_wa}}  
+                        <p class="text-sizing" style="color: green;">
+                        <img src="assets/img/whatsapp.png" class="icon-size" style="width: 20px;height: 20px; border-radius: 20px; background-color: green;"> {{this.link_wa}}  
                         </p>
                     </div>
                 </div>
