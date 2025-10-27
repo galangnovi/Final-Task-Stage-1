@@ -383,16 +383,14 @@ h1 {
     padding: 60px 5% 20px 5%;
   }
 
-  .card{
-    width: 60% !important;
-  }
+  
   .sub-cont > div {
     display: flex;
     justify-content: center;
   }
  
   .card-frame-img{
-    height: 180px;
+    height: 100px;
   }
   .flex{
     display: flex;
