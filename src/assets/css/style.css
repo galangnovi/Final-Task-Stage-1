@@ -384,7 +384,7 @@ h1 {
   }
 
   .card{
-    width: 80% !important;
+    width: 60% !important;
   }
   .sub-cont > div {
     display: flex;
@@ -418,7 +418,7 @@ h1 {
   }
 
   .footer-text{
-    font-size: 8px !important;
+    font-size: 10px !important;
   }
   .text-sizing {
     font-size: 13px !important;
