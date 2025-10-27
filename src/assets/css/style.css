@@ -9,7 +9,7 @@ main{
 .card{
     flex: 1 1 calc(100% - 20px); /* default: full width */
     max-width: 500px;            /* batas maksimal */
-    min-width: 100px;            /* agar tidak terlalu kecil */
+    /* min-width: 100px;            agar tidak terlalu kecil */
     /* border-radius: 15px !important; */
     margin-bottom: 20px;
     /* background-color: rgba(233, 233, 239, 0.1) !important;
@@ -418,7 +418,7 @@ h1 {
   }
 
   .footer-text{
-    font-size: 5px !important;
+    font-size: 8px !important;
   }
   .text-sizing {
     font-size: 13px !important;
